@@ -1,0 +1,21 @@
+{
+  "name": "Banking General Ledger System",
+  "short_name": "Banking GL",
+  "description": "Banking General Ledger System Demo - ISO 20022 & MAS 610 Compliance",
+  "start_url": "/banking-ledger-demo/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1890ff",
+  "icons": [
+    {
+      "src": "/banking-ledger-demo/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/banking-ledger-demo/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
