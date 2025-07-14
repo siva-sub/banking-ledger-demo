@@ -1,0 +1,56 @@
+{
+  "id": "payment-lifecycle",
+  "title": "Complete Payment Lifecycle",
+  "description": "Follow a payment from initiation through settlement, demonstrating the full ISO 20022 workflow.",
+  "estimatedTime": 300,
+  "difficulty": "beginner",
+  "tags": [
+    "payments",
+    "iso20022",
+    "workflow"
+  ],
+  "steps": [
+    {
+      "persona": "sarah-chen",
+      "action": "create-pain001-payment",
+      "description": "Create a new customer payment instruction using pain.001 format",
+      "expectedOutcome": "Payment appears in pending approval queue",
+      "duration": 60
+    },
+    {
+      "persona": "lisa-thompson",
+      "action": "review-and-approve",
+      "description": "Review payment details and approve for processing",
+      "expectedOutcome": "Payment status changes to approved",
+      "duration": 45
+    },
+    {
+      "persona": "sarah-chen",
+      "action": "process-payment",
+      "description": "Submit approved payment to bank network",
+      "expectedOutcome": "Payment moves to processing status",
+      "duration": 30
+    },
+    {
+      "persona": "sarah-chen",
+      "action": "receive-confirmation",
+      "description": "Receive pain.002 confirmation from bank",
+      "expectedOutcome": "Payment confirmed and recorded",
+      "duration": 30
+    },
+    {
+      "persona": "sarah-chen",
+      "action": "settlement-update",
+      "description": "Process camt.053 settlement notification",
+      "expectedOutcome": "Payment marked as completed",
+      "duration": 60
+    },
+    {
+      "persona": "michael-rodriguez",
+      "action": "audit-trail",
+      "description": "Review complete audit trail for compliance",
+      "expectedOutcome": "Full transaction history documented",
+      "duration": 75
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "reconciliation-process",
+  "title": "Daily Reconciliation Process",
+  "description": "Perform daily reconciliation of payments and bank statements.",
+  "estimatedTime": 420,
+  "difficulty": "intermediate",
+  "tags": [
+    "reconciliation",
+    "camt.053",
+    "operations"
+  ],
+  "steps": [
+    {
+      "persona": "sarah-chen",
+      "action": "download-statements",
+      "description": "Download and process daily bank statements (camt.053)",
+      "expectedOutcome": "Bank statements loaded and parsed",
+      "duration": 90
+    },
+    {
+      "persona": "sarah-chen",
+      "action": "match-transactions",
+      "description": "Match bank transactions with internal payment records",
+      "expectedOutcome": "Most transactions automatically matched",
+      "duration": 120
+    },
+    {
+      "persona": "sarah-chen",
+      "action": "investigate-exceptions",
+      "description": "Investigate unmatched transactions and breaks",
+      "expectedOutcome": "Exceptions identified and categorized",
+      "duration": 120
+    },
+    {
+      "persona": "michael-rodriguez",
+      "action": "review-reconciliation",
+      "description": "Review reconciliation results and approve",
+      "expectedOutcome": "Reconciliation approved and finalized",
+      "duration": 90
+    }
+  ]
+}

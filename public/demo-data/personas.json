@@ -1,0 +1,149 @@
+{
+  "personas": [
+    {
+      "id": "sarah-chen",
+      "name": "Sarah Chen",
+      "role": "Financial Operations Manager",
+      "department": "Operations",
+      "email": "sarah.chen@demo.bank",
+      "avatar": "/demo-data/avatars/sarah-chen.png",
+      "permissions": [
+        "payment_initiation",
+        "transaction_processing",
+        "reconciliation",
+        "approval_level_1",
+        "iso20022_processing"
+      ],
+      "defaultDashboard": "operations-dashboard",
+      "description": "Responsible for daily transaction processing, payment initiation, and reconciliation operations.",
+      "experience": "8 years in financial operations",
+      "specialties": ["ISO 20022", "Payment Processing", "Reconciliation"],
+      "currentTasks": [
+        "Process morning payment batch",
+        "Reconcile overnight transactions",
+        "Review exception reports"
+      ],
+      "metrics": {
+        "paymentsProcessedToday": 847,
+        "reconciliationAccuracy": 99.8,
+        "avgProcessingTime": "2.3 minutes"
+      }
+    },
+    {
+      "id": "michael-rodriguez",
+      "name": "Michael Rodriguez",
+      "role": "Compliance Officer",
+      "department": "Compliance",
+      "email": "michael.rodriguez@demo.bank",
+      "avatar": "/demo-data/avatars/michael-rodriguez.png",
+      "permissions": [
+        "regulatory_reporting",
+        "audit_trail_access",
+        "compliance_validation",
+        "mas610_reporting",
+        "risk_assessment"
+      ],
+      "defaultDashboard": "compliance-dashboard",
+      "description": "Ensures regulatory compliance and manages audit trails for all financial transactions.",
+      "experience": "12 years in financial compliance",
+      "specialties": ["MAS 610 Reporting", "Regulatory Compliance", "Audit Management"],
+      "currentTasks": [
+        "Prepare monthly MAS 610 report",
+        "Review compliance violations",
+        "Audit trail verification"
+      ],
+      "metrics": {
+        "reportsGenerated": 23,
+        "complianceScore": 98.5,
+        "auditFindingsResolved": 15
+      }
+    },
+    {
+      "id": "lisa-thompson",
+      "name": "Lisa Thompson",
+      "role": "Treasury Manager",
+      "department": "Treasury",
+      "email": "lisa.thompson@demo.bank",
+      "avatar": "/demo-data/avatars/lisa-thompson.png",
+      "permissions": [
+        "cash_management",
+        "liquidity_monitoring",
+        "interbank_transfers",
+        "currency_operations",
+        "exposure_management"
+      ],
+      "defaultDashboard": "treasury-dashboard",
+      "description": "Manages cash positions, liquidity, and interbank operations across multiple currencies.",
+      "experience": "10 years in treasury operations",
+      "specialties": ["Cash Management", "Liquidity Risk", "Currency Operations"],
+      "currentTasks": [
+        "Monitor daily cash position",
+        "Execute interbank transfers",
+        "Review currency exposures"
+      ],
+      "metrics": {
+        "cashPositionUSD": 125000000,
+        "liquidityRatio": 142.3,
+        "currenciesManaged": 12
+      }
+    },
+    {
+      "id": "david-park",
+      "name": "David Park",
+      "role": "Risk Management Analyst",
+      "department": "Risk Management",
+      "email": "david.park@demo.bank",
+      "avatar": "/demo-data/avatars/david-park.png",
+      "permissions": [
+        "risk_analysis",
+        "topology_analysis",
+        "pattern_detection",
+        "anomaly_monitoring",
+        "network_analysis"
+      ],
+      "defaultDashboard": "risk-dashboard",
+      "description": "Analyzes transaction patterns and performs network topology analysis for risk assessment.",
+      "experience": "6 years in financial risk analysis",
+      "specialties": ["Network Analysis", "Pattern Recognition", "Risk Modeling"],
+      "currentTasks": [
+        "Analyze transaction topology",
+        "Investigate anomalous patterns",
+        "Update risk models"
+      ],
+      "metrics": {
+        "anomaliesDetected": 7,
+        "riskScore": 23.5,
+        "networkNodesAnalyzed": 15420
+      }
+    },
+    {
+      "id": "anna-mueller",
+      "name": "Anna Mueller",
+      "role": "System Administrator",
+      "department": "IT Operations",
+      "email": "anna.mueller@demo.bank",
+      "avatar": "/demo-data/avatars/anna-mueller.png",
+      "permissions": [
+        "system_administration",
+        "user_management",
+        "system_monitoring",
+        "backup_management",
+        "performance_monitoring"
+      ],
+      "defaultDashboard": "admin-dashboard",
+      "description": "Manages system infrastructure, user accounts, and monitors system performance.",
+      "experience": "15 years in financial systems administration",
+      "specialties": ["System Architecture", "Performance Tuning", "Security Management"],
+      "currentTasks": [
+        "Monitor system performance",
+        "Manage user accounts",
+        "Review security logs"
+      ],
+      "metrics": {
+        "systemUptime": 99.97,
+        "activeUsers": 247,
+        "backupSuccess": 100
+      }
+    }
+  ]
+}

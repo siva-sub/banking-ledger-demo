@@ -1,0 +1,17 @@
+{
+  "id": "anna-mueller",
+  "name": "Anna Mueller",
+  "role": "System Administrator",
+  "email": "anna.mueller@demobank.com",
+  "permissions": [
+    "admin",
+    "system",
+    "users",
+    "reporting"
+  ],
+  "defaultDashboard": "admin",
+  "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=anna",
+  "department": "IT Operations",
+  "joinDate": "2017-04-18",
+  "lastLogin": "2025-07-14T16:42:04.010Z"
+}

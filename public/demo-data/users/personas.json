@@ -1,0 +1,83 @@
+[
+  {
+    "id": "sarah-chen",
+    "name": "Sarah Chen",
+    "role": "Financial Operations Manager",
+    "email": "sarah.chen@demobank.com",
+    "permissions": [
+      "payments",
+      "reconciliation",
+      "reporting"
+    ],
+    "defaultDashboard": "operations",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarah",
+    "department": "Treasury Operations",
+    "joinDate": "2020-03-15",
+    "lastLogin": "2025-07-14T16:47:04.010Z"
+  },
+  {
+    "id": "michael-rodriguez",
+    "name": "Michael Rodriguez",
+    "role": "Compliance Officer",
+    "email": "michael.rodriguez@demobank.com",
+    "permissions": [
+      "compliance",
+      "reporting",
+      "audit"
+    ],
+    "defaultDashboard": "compliance",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=michael",
+    "department": "Risk & Compliance",
+    "joinDate": "2019-01-10",
+    "lastLogin": "2025-07-14T14:47:04.010Z"
+  },
+  {
+    "id": "lisa-thompson",
+    "name": "Lisa Thompson",
+    "role": "Treasury Manager",
+    "email": "lisa.thompson@demobank.com",
+    "permissions": [
+      "treasury",
+      "liquidity",
+      "reporting"
+    ],
+    "defaultDashboard": "treasury",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisa",
+    "department": "Treasury Management",
+    "joinDate": "2018-07-22",
+    "lastLogin": "2025-07-14T16:17:04.010Z"
+  },
+  {
+    "id": "david-park",
+    "name": "David Park",
+    "role": "Risk Management Analyst",
+    "email": "david.park@demobank.com",
+    "permissions": [
+      "risk",
+      "analytics",
+      "reporting"
+    ],
+    "defaultDashboard": "risk",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=david",
+    "department": "Risk Management",
+    "joinDate": "2021-11-03",
+    "lastLogin": "2025-07-14T16:37:04.010Z"
+  },
+  {
+    "id": "anna-mueller",
+    "name": "Anna Mueller",
+    "role": "System Administrator",
+    "email": "anna.mueller@demobank.com",
+    "permissions": [
+      "admin",
+      "system",
+      "users",
+      "reporting"
+    ],
+    "defaultDashboard": "admin",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=anna",
+    "department": "IT Operations",
+    "joinDate": "2017-04-18",
+    "lastLogin": "2025-07-14T16:42:04.010Z"
+  }
+]

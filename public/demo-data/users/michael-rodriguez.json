@@ -1,0 +1,16 @@
+{
+  "id": "michael-rodriguez",
+  "name": "Michael Rodriguez",
+  "role": "Compliance Officer",
+  "email": "michael.rodriguez@demobank.com",
+  "permissions": [
+    "compliance",
+    "reporting",
+    "audit"
+  ],
+  "defaultDashboard": "compliance",
+  "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=michael",
+  "department": "Risk & Compliance",
+  "joinDate": "2019-01-10",
+  "lastLogin": "2025-07-14T14:47:04.010Z"
+}

@@ -1,0 +1,182 @@
+{
+  "bankStatements": [
+    {
+      "id": "STMT-2025-01-14-001",
+      "accountId": "SG-001-12345678",
+      "accountName": "Demo Bank Operational Account",
+      "currency": "SGD",
+      "statementDate": "2025-01-14",
+      "openingBalance": 15650000.00,
+      "closingBalance": 15750000.00,
+      "messageType": "camt.053",
+      "entries": [
+        {
+          "id": "ENTRY-001",
+          "entryReference": "INCOMING-20250114-001",
+          "amount": 200000.00,
+          "creditDebitCode": "CRDT",
+          "status": "BOOK",
+          "bookingDate": "2025-01-14",
+          "valueDate": "2025-01-14",
+          "accountServicerReference": "ASR-001",
+          "transactionDetails": {
+            "endToEndId": "E2E-CUST-20250114-001",
+            "transactionId": "TXN-BANK-001",
+            "mandateId": null,
+            "purpose": "SUPP",
+            "remittanceInformation": "Customer payment for services rendered",
+            "relatedParties": {
+              "debtor": {
+                "name": "Singapore Manufacturing Pte Ltd",
+                "account": "SG-004-55667788"
+              },
+              "creditor": {
+                "name": "Demo Bank",
+                "account": "SG-001-12345678"
+              }
+            }
+          }
+        },
+        {
+          "id": "ENTRY-002",
+          "entryReference": "OUTGOING-20250114-002",
+          "amount": 125000.00,
+          "creditDebitCode": "DBIT",
+          "status": "BOOK",
+          "bookingDate": "2025-01-14",
+          "valueDate": "2025-01-14",
+          "accountServicerReference": "ASR-002",
+          "transactionDetails": {
+            "endToEndId": "E2E-GT-20250114-001",
+            "transactionId": "TXN-BANK-002",
+            "mandateId": null,
+            "purpose": "SUPP",
+            "remittanceInformation": "Invoice INV-2024-5678 payment",
+            "relatedParties": {
+              "debtor": {
+                "name": "Demo Bank",
+                "account": "SG-001-12345678"
+              },
+              "creditor": {
+                "name": "Global Trading Corp",
+                "account": "US-002-87654321"
+              }
+            }
+          }
+        },
+        {
+          "id": "ENTRY-003",
+          "entryReference": "FEE-20250114-001",
+          "amount": 25.00,
+          "creditDebitCode": "DBIT",
+          "status": "BOOK",
+          "bookingDate": "2025-01-14",
+          "valueDate": "2025-01-14",
+          "accountServicerReference": "ASR-003",
+          "transactionDetails": {
+            "endToEndId": "E2E-FEE-20250114-001",
+            "transactionId": "TXN-BANK-003",
+            "mandateId": null,
+            "purpose": "CHAR",
+            "remittanceInformation": "Wire transfer fee",
+            "relatedParties": {
+              "debtor": {
+                "name": "Demo Bank",
+                "account": "SG-001-12345678"
+              },
+              "creditor": {
+                "name": "Demo Bank",
+                "account": "SG-001-12345678"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "STMT-2025-01-14-002",
+      "accountId": "US-002-87654321",
+      "accountName": "Demo Bank USD Nostro Account",
+      "currency": "USD",
+      "statementDate": "2025-01-14",
+      "openingBalance": 8375000.00,
+      "closingBalance": 8500000.00,
+      "messageType": "camt.053",
+      "entries": [
+        {
+          "id": "ENTRY-004",
+          "entryReference": "INCOMING-20250114-003",
+          "amount": 125000.00,
+          "creditDebitCode": "CRDT",
+          "status": "BOOK",
+          "bookingDate": "2025-01-14",
+          "valueDate": "2025-01-14",
+          "accountServicerReference": "ASR-004",
+          "transactionDetails": {
+            "endToEndId": "E2E-GT-20250114-001",
+            "transactionId": "TXN-BANK-004",
+            "mandateId": null,
+            "purpose": "SUPP",
+            "remittanceInformation": "Invoice INV-2024-5678 payment",
+            "relatedParties": {
+              "debtor": {
+                "name": "Demo Bank",
+                "account": "SG-001-12345678"
+              },
+              "creditor": {
+                "name": "Global Trading Corp",
+                "account": "US-002-87654321"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "reconciliationRules": [
+    {
+      "id": "RULE-001",
+      "name": "End-to-End ID Matching",
+      "description": "Match transactions using end-to-end identification",
+      "priority": 1,
+      "matchingCriteria": {
+        "field": "endToEndId",
+        "type": "exact",
+        "tolerance": 0
+      },
+      "isActive": true
+    },
+    {
+      "id": "RULE-002",
+      "name": "Amount and Date Matching",
+      "description": "Match transactions by amount and value date",
+      "priority": 2,
+      "matchingCriteria": {
+        "fields": ["amount", "valueDate"],
+        "type": "combined",
+        "tolerance": 0.01
+      },
+      "isActive": true
+    },
+    {
+      "id": "RULE-003",
+      "name": "Reference Number Matching",
+      "description": "Match using transaction reference numbers",
+      "priority": 3,
+      "matchingCriteria": {
+        "field": "transactionId",
+        "type": "partial",
+        "tolerance": 0
+      },
+      "isActive": true
+    }
+  ],
+  "matchingSettings": {
+    "autoMatchThreshold": 0.95,
+    "manualReviewThreshold": 0.8,
+    "rejectThreshold": 0.5,
+    "matchingWindow": 3,
+    "enableFuzzyMatching": true,
+    "requiredFields": ["amount", "valueDate"]
+  }
+}

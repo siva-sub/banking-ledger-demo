@@ -1,0 +1,192 @@
+{
+  "calculationData": {
+    "capitalData": {
+      "tier1Capital": {
+        "commonEquity": 1000000000,
+        "retainedEarnings": 200000000,
+        "otherComprehensiveIncome": 50000000,
+        "deductions": {
+          "goodwill": 30000000,
+          "intangibleAssets": 20000000,
+          "deferredTaxAssets": 15000000,
+          "investmentInSubsidiaries": 35000000
+        },
+        "additionalTier1": {
+          "perpetualPreferredStock": 150000000,
+          "contingentConvertibleBonds": 100000000
+        }
+      },
+      "tier2Capital": {
+        "subordinatedDebt": 400000000,
+        "hybridInstruments": 150000000,
+        "generalProvisions": 100000000,
+        "unrealizedGains": 25000000,
+        "deductions": {
+          "investmentInOtherBanks": 25000000
+        }
+      },
+      "riskWeightedAssets": {
+        "creditRisk": 10500000000,
+        "marketRisk": 1200000000,
+        "operationalRisk": 800000000,
+        "total": 12500000000
+      }
+    },
+    "liquidityData": {
+      "hqla": {
+        "level1Assets": {
+          "cash": 500000000,
+          "centralBankReserves": 800000000,
+          "governmentSecurities": 300000000,
+          "total": 1600000000
+        },
+        "level2AAssets": {
+          "corporateBonds": 200000000,
+          "coveredBonds": 150000000,
+          "total": 350000000
+        },
+        "level2BAssets": {
+          "equities": 100000000,
+          "lowerGradeCorporateBonds": 50000000,
+          "total": 150000000
+        },
+        "totalHQLA": 2100000000
+      },
+      "cashOutflows": {
+        "retailDeposits": {
+          "stable": 800000000,
+          "lessStable": 400000000,
+          "outflowRate": 0.05
+        },
+        "unsecuredWholesaleFunding": {
+          "operationalDeposits": 600000000,
+          "nonOperationalDeposits": 800000000,
+          "outflowRate": 0.25
+        },
+        "securedFunding": {
+          "repoTransactions": 200000000,
+          "outflowRate": 0.1
+        },
+        "additionalRequirements": {
+          "derivativeExposures": 100000000,
+          "creditCommitments": 300000000,
+          "otherContingentLiabilities": 200000000
+        }
+      },
+      "cashInflows": {
+        "performingLoans": 400000000,
+        "otherReceivables": 100000000,
+        "inflowRate": 0.5
+      }
+    },
+    "exposureData": {
+      "largeExposures": [
+        {
+          "counterpartyId": "CORP-001",
+          "counterpartyName": "Major Corporation A",
+          "exposureType": "corporate",
+          "exposureAmount": 278500000,
+          "riskWeight": 100,
+          "guarantees": [],
+          "collateral": 0,
+          "netExposure": 278500000
+        },
+        {
+          "counterpartyId": "BANK-001",
+          "counterpartyName": "International Bank B",
+          "exposureType": "financial_institution",
+          "exposureAmount": 231000000,
+          "riskWeight": 20,
+          "guarantees": [],
+          "collateral": 50000000,
+          "netExposure": 181000000
+        },
+        {
+          "counterpartyId": "CORP-002",
+          "counterpartyName": "Real Estate Group C",
+          "exposureType": "corporate",
+          "exposureAmount": 195000000,
+          "riskWeight": 100,
+          "guarantees": ["GOVT-001"],
+          "collateral": 100000000,
+          "netExposure": 95000000
+        }
+      ],
+      "totalExposures": 127,
+      "totalExposureAmount": 15250000000,
+      "averageExposureAmount": 120078740
+    },
+    "marketRiskData": {
+      "tradingBook": {
+        "equityPositions": {
+          "longPositions": 150000000,
+          "shortPositions": 100000000,
+          "netPosition": 50000000,
+          "capitalCharge": 4000000
+        },
+        "interestRatePositions": {
+          "longPositions": 800000000,
+          "shortPositions": 750000000,
+          "netPosition": 50000000,
+          "capitalCharge": 2000000
+        },
+        "foreignExchangePositions": {
+          "usdPosition": 200000000,
+          "eurPosition": -150000000,
+          "jpyPosition": 100000000,
+          "overallNetOpenPosition": 150000000,
+          "capitalCharge": 12000000
+        },
+        "commodityPositions": {
+          "goldPosition": 50000000,
+          "oilPosition": 25000000,
+          "capitalCharge": 7500000
+        }
+      },
+      "totalMarketRiskCapital": 25500000
+    },
+    "operationalRiskData": {
+      "businessLines": {
+        "corporateFinance": {
+          "grossIncome": 100000000,
+          "beta": 0.18,
+          "capitalCharge": 18000000
+        },
+        "tradingAndSales": {
+          "grossIncome": 150000000,
+          "beta": 0.18,
+          "capitalCharge": 27000000
+        },
+        "retailBanking": {
+          "grossIncome": 200000000,
+          "beta": 0.12,
+          "capitalCharge": 24000000
+        },
+        "commercialBanking": {
+          "grossIncome": 180000000,
+          "beta": 0.15,
+          "capitalCharge": 27000000
+        }
+      },
+      "totalOperationalRiskCapital": 96000000
+    }
+  },
+  "calculationMetadata": {
+    "calculationDate": "2025-01-14T00:00:00Z",
+    "reportingPeriod": {
+      "startDate": "2025-01-01",
+      "endDate": "2025-01-14"
+    },
+    "dataSource": "general_ledger",
+    "calculationMethod": "standardized_approach",
+    "approvalStatus": "pending",
+    "reviewedBy": null,
+    "approvedBy": null,
+    "validationChecks": {
+      "dataCompleteness": true,
+      "businessRuleValidation": true,
+      "mathematicalAccuracy": true,
+      "regulatoryCompliance": true
+    }
+  }
+}

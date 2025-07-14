@@ -1,0 +1,441 @@
+{
+  "scenarios": [
+    {
+      "id": "payment-approval-workflow",
+      "title": "Complete Payment Approval Workflow",
+      "description": "Experience the full lifecycle of a payment from initiation through approval and settlement",
+      "category": "workflow",
+      "estimatedTime": 8,
+      "difficulty": "intermediate",
+      "prerequisites": [],
+      "learningObjectives": [
+        "Understand pain.001 message structure",
+        "Learn approval workflow mechanics",
+        "See real-time status updates",
+        "Experience cross-persona collaboration"
+      ],
+      "steps": [
+        {
+          "id": "step-1",
+          "title": "Create Payment Request",
+          "persona": "sarah-chen",
+          "action": "create-payment",
+          "duration": 120,
+          "description": "As Operations Manager, create a new customer payment instruction using pain.001 format",
+          "instructions": [
+            "Navigate to Payment Processing dashboard",
+            "Click 'New Payment' button",
+            "Fill in payment details for €75,000 to European Suppliers Ltd",
+            "Select urgency level and execution date",
+            "Submit for approval"
+          ],
+          "expectedOutcome": "Payment appears in pending approval queue with status 'pending_approval'",
+          "uiChanges": [
+            "Payment counter increases in dashboard",
+            "New entry appears in pending payments table",
+            "Notification sent to approver"
+          ],
+          "validationPoints": [
+            "Payment amount validation",
+            "Account balance check",
+            "Compliance screening"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Review and Approve Payment",
+          "persona": "michael-rodriguez",
+          "action": "approve-payment",
+          "duration": 180,
+          "description": "As Compliance Officer, review payment details and approve the transaction",
+          "instructions": [
+            "Switch to Compliance dashboard",
+            "Open pending approvals queue",
+            "Select the €75,000 payment",
+            "Review compliance checks and documentation",
+            "Approve payment with digital signature"
+          ],
+          "expectedOutcome": "Payment status changes to 'approved' and moves to processing queue",
+          "uiChanges": [
+            "Payment status updated in real-time",
+            "Approval timestamp recorded",
+            "Audit trail entry created"
+          ],
+          "validationPoints": [
+            "Authorization limit check",
+            "Regulatory compliance validation",
+            "Digital signature verification"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Monitor Cash Impact",
+          "persona": "lisa-thompson",
+          "action": "monitor-liquidity",
+          "duration": 90,
+          "description": "As Treasury Manager, monitor the impact on cash position and liquidity ratios",
+          "instructions": [
+            "Switch to Treasury dashboard",
+            "View real-time cash position",
+            "Check EUR account balance impact",
+            "Review liquidity coverage ratio changes",
+            "Assess need for funding adjustments"
+          ],
+          "expectedOutcome": "Cash position and LCR updated to reflect outgoing payment",
+          "uiChanges": [
+            "Cash position chart updated",
+            "LCR ratio recalculated",
+            "Currency exposure metrics refreshed"
+          ],
+          "validationPoints": [
+            "Account balance validation",
+            "LCR threshold monitoring",
+            "Currency exposure limits"
+          ]
+        },
+        {
+          "id": "step-4",
+          "title": "Analyze Transaction Pattern",
+          "persona": "david-park",
+          "action": "analyze-risk",
+          "duration": 150,
+          "description": "As Risk Analyst, analyze the transaction for patterns and network topology",
+          "instructions": [
+            "Switch to Risk Management dashboard",
+            "Add new transaction to topology analysis",
+            "Review counterparty risk profile",
+            "Check for unusual patterns or concentrations",
+            "Update risk scoring models"
+          ],
+          "expectedOutcome": "Transaction integrated into risk analysis with updated network topology",
+          "uiChanges": [
+            "Network diagram updated with new connection",
+            "Risk score recalculated",
+            "Pattern analysis refreshed"
+          ],
+          "validationPoints": [
+            "Counterparty risk assessment",
+            "Transaction pattern analysis",
+            "Network topology validation"
+          ]
+        },
+        {
+          "id": "step-5",
+          "title": "Settlement Confirmation",
+          "persona": "sarah-chen",
+          "action": "confirm-settlement",
+          "duration": 60,
+          "description": "Back to Operations to confirm settlement via bank statement processing",
+          "instructions": [
+            "Return to Operations dashboard",
+            "Process incoming camt.053 statement",
+            "Match payment with settlement confirmation",
+            "Update payment status to 'settled'",
+            "Complete reconciliation process"
+          ],
+          "expectedOutcome": "Payment fully settled and reconciled with complete audit trail",
+          "uiChanges": [
+            "Payment status updated to 'settled'",
+            "Reconciliation dashboard updated",
+            "Audit trail completed"
+          ],
+          "validationPoints": [
+            "Settlement matching accuracy",
+            "Reconciliation completeness",
+            "Audit trail integrity"
+          ]
+        }
+      ],
+      "dataRequirements": [
+        "demo-transactions.json",
+        "personas.json",
+        "account-balances.json"
+      ],
+      "completionCriteria": {
+        "allStepsCompleted": true,
+        "validationsPassed": true,
+        "timeWithinLimit": true
+      }
+    },
+    {
+      "id": "mas610-report-generation",
+      "title": "MAS 610 Regulatory Report Generation",
+      "description": "Generate and submit a complete MAS 610 regulatory report including CAR and LCR calculations",
+      "category": "compliance",
+      "estimatedTime": 12,
+      "difficulty": "advanced",
+      "prerequisites": ["basic-navigation"],
+      "learningObjectives": [
+        "Understand MAS 610 reporting requirements",
+        "Learn CAR and LCR calculation methodology",
+        "Experience automated report generation",
+        "See validation and submission process"
+      ],
+      "steps": [
+        {
+          "id": "step-1",
+          "title": "Initiate Report Generation",
+          "persona": "michael-rodriguez",
+          "action": "start-report",
+          "duration": 180,
+          "description": "As Compliance Officer, initiate the monthly MAS 610 report generation process",
+          "instructions": [
+            "Navigate to Regulatory Reporting dashboard",
+            "Select 'Generate New Report'",
+            "Choose report type: Capital Adequacy Ratio (CAR)",
+            "Set reporting period: January 2025",
+            "Configure calculation parameters"
+          ],
+          "expectedOutcome": "Report generation begins with estimated completion time",
+          "uiChanges": [
+            "Progress indicator appears",
+            "Report status updated to 'generating'",
+            "Calculation engine starts processing"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Review Calculation Results",
+          "persona": "michael-rodriguez",
+          "action": "review-calculations",
+          "duration": 240,
+          "description": "Review automated calculations and validate against regulatory requirements",
+          "instructions": [
+            "Open generated report draft",
+            "Review Tier 1 and Total Capital ratios",
+            "Validate risk-weighted asset calculations",
+            "Check compliance against minimum requirements",
+            "Identify any warnings or exceptions"
+          ],
+          "expectedOutcome": "Report calculations validated and ready for submission",
+          "uiChanges": [
+            "Calculation results displayed",
+            "Compliance status indicators shown",
+            "Warning messages highlighted"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Generate LCR Report",
+          "persona": "lisa-thompson",
+          "action": "generate-lcr",
+          "duration": 200,
+          "description": "As Treasury Manager, generate the Liquidity Coverage Ratio component",
+          "instructions": [
+            "Switch to Treasury dashboard",
+            "Navigate to LCR reporting section",
+            "Review high-quality liquid assets (HQLA)",
+            "Validate net cash outflow calculations",
+            "Generate LCR report section"
+          ],
+          "expectedOutcome": "LCR section completed and integrated into main report",
+          "uiChanges": [
+            "LCR calculations displayed",
+            "HQLA breakdown shown",
+            "Integration with main report confirmed"
+          ]
+        },
+        {
+          "id": "step-4",
+          "title": "Final Validation and Submission",
+          "persona": "michael-rodriguez",
+          "action": "submit-report",
+          "duration": 180,
+          "description": "Perform final validation checks and submit report to MAS",
+          "instructions": [
+            "Return to Compliance dashboard",
+            "Run final validation checks",
+            "Review complete report package",
+            "Apply digital signature",
+            "Submit to MAS regulatory portal"
+          ],
+          "expectedOutcome": "Report successfully submitted with confirmation receipt",
+          "uiChanges": [
+            "Report status updated to 'submitted'",
+            "Submission confirmation displayed",
+            "Next due date updated"
+          ]
+        }
+      ],
+      "dataRequirements": [
+        "mas610-reports.json",
+        "regulatory-parameters.json",
+        "calculation-data.json"
+      ]
+    },
+    {
+      "id": "reconciliation-process",
+      "title": "Daily Reconciliation Process",
+      "description": "Complete daily reconciliation of bank statements with internal payment records",
+      "category": "operations",
+      "estimatedTime": 6,
+      "difficulty": "beginner",
+      "prerequisites": [],
+      "learningObjectives": [
+        "Understand bank statement processing",
+        "Learn reconciliation matching logic",
+        "Handle exceptions and manual interventions",
+        "Generate reconciliation reports"
+      ],
+      "steps": [
+        {
+          "id": "step-1",
+          "title": "Import Bank Statement",
+          "persona": "sarah-chen",
+          "action": "import-statement",
+          "duration": 120,
+          "description": "Import and process incoming camt.053 bank statement",
+          "instructions": [
+            "Navigate to Reconciliation dashboard",
+            "Select 'Import Statement' option",
+            "Upload camt.053 file",
+            "Validate statement format and data",
+            "Process statement entries"
+          ],
+          "expectedOutcome": "Bank statement processed and entries loaded for matching",
+          "uiChanges": [
+            "Statement entries appear in reconciliation queue",
+            "Processing status updated",
+            "Match candidates identified"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Automatic Matching",
+          "persona": "sarah-chen",
+          "action": "auto-match",
+          "duration": 90,
+          "description": "Run automatic matching algorithm for statement entries",
+          "instructions": [
+            "Click 'Run Auto-Match' button",
+            "Review matching results",
+            "Verify high-confidence matches",
+            "Flag uncertain matches for manual review",
+            "Update reconciliation status"
+          ],
+          "expectedOutcome": "Majority of entries automatically matched with high confidence",
+          "uiChanges": [
+            "Match results displayed with confidence scores",
+            "Matched entries highlighted in green",
+            "Uncertain matches flagged in yellow"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Manual Exception Handling",
+          "persona": "sarah-chen",
+          "action": "resolve-exceptions",
+          "duration": 180,
+          "description": "Manually resolve unmatched entries and exceptions",
+          "instructions": [
+            "Review unmatched statement entries",
+            "Search for potential matches in payment history",
+            "Create manual matches where appropriate",
+            "Flag genuinely unmatched items",
+            "Document resolution reasons"
+          ],
+          "expectedOutcome": "All exceptions resolved or properly documented",
+          "uiChanges": [
+            "Exception queue cleared",
+            "Manual match confirmations logged",
+            "Unmatched items properly categorized"
+          ]
+        },
+        {
+          "id": "step-4",
+          "title": "Generate Reconciliation Report",
+          "persona": "sarah-chen",
+          "action": "generate-recon-report",
+          "duration": 90,
+          "description": "Generate daily reconciliation report with summary statistics",
+          "instructions": [
+            "Navigate to report generation section",
+            "Select reconciliation report template",
+            "Configure report parameters",
+            "Generate comprehensive reconciliation summary",
+            "Review and approve report"
+          ],
+          "expectedOutcome": "Complete reconciliation report generated and approved",
+          "uiChanges": [
+            "Report generated with summary statistics",
+            "Charts and graphs display reconciliation metrics",
+            "Report saved to historical records"
+          ]
+        }
+      ],
+      "dataRequirements": [
+        "demo-transactions.json",
+        "bank-statements.json",
+        "reconciliation-rules.json"
+      ]
+    }
+  ],
+  "scenarioCategories": [
+    {
+      "id": "workflow",
+      "name": "Workflow Demonstrations",
+      "description": "End-to-end business process workflows",
+      "icon": "workflow",
+      "color": "#3B82F6"
+    },
+    {
+      "id": "compliance",
+      "name": "Regulatory Compliance",
+      "description": "Regulatory reporting and compliance processes",
+      "icon": "compliance",
+      "color": "#10B981"
+    },
+    {
+      "id": "operations",
+      "name": "Daily Operations",
+      "description": "Day-to-day operational processes",
+      "icon": "operations",
+      "color": "#F59E0B"
+    },
+    {
+      "id": "analytics",
+      "name": "Analysis & Reporting",
+      "description": "Data analysis and business intelligence",
+      "icon": "analytics",
+      "color": "#8B5CF6"
+    }
+  ],
+  "guidedTour": {
+    "id": "system-overview",
+    "title": "System Overview Tour",
+    "description": "Get familiar with the general ledger system interface and key features",
+    "duration": 10,
+    "steps": [
+      {
+        "title": "Welcome to the General Ledger System",
+        "description": "This tour will introduce you to the key features and navigation",
+        "target": "dashboard",
+        "position": "center"
+      },
+      {
+        "title": "Persona Switcher",
+        "description": "Switch between different user roles to see their specific dashboards",
+        "target": "persona-switcher",
+        "position": "bottom"
+      },
+      {
+        "title": "Navigation Menu",
+        "description": "Access different modules and features from the main navigation",
+        "target": "nav-menu",
+        "position": "right"
+      },
+      {
+        "title": "Dashboard Overview",
+        "description": "View key metrics and status information relevant to your role",
+        "target": "dashboard-metrics",
+        "position": "bottom"
+      },
+      {
+        "title": "Demo Scenarios",
+        "description": "Try interactive scenarios to learn how the system works",
+        "target": "demo-scenarios",
+        "position": "left"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "sarah-chen",
+  "name": "Sarah Chen",
+  "role": "Financial Operations Manager",
+  "email": "sarah.chen@demobank.com",
+  "permissions": [
+    "payments",
+    "reconciliation",
+    "reporting"
+  ],
+  "defaultDashboard": "operations",
+  "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarah",
+  "department": "Treasury Operations",
+  "joinDate": "2020-03-15",
+  "lastLogin": "2025-07-14T16:47:04.010Z"
+}

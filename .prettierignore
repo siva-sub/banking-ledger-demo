@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+coverage
+*.min.js
+*.min.css
+package-lock.json
+yarn.lock
+.gitignore
+.eslintrc.json
+.prettierrc
+tsconfig.json
+vite.config.ts
+public/demo-data/
+.github/

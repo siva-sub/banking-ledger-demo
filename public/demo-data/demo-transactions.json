@@ -1,0 +1,134 @@
+{
+  "transactions": [
+    {
+      "id": "TXN-000001",
+      "messageType": "pain.001",
+      "status": "approved",
+      "amount": 125000.00,
+      "currency": "USD",
+      "debtorAccount": "SG-001-12345678",
+      "creditorAccount": "US-002-87654321",
+      "creditorName": "Global Trading Corp",
+      "endToEndId": "E2E-GT-20250114-001",
+      "remittanceInfo": "Invoice INV-2024-5678 payment",
+      "requestedExecutionDate": "2025-01-14",
+      "createdBy": "sarah-chen",
+      "createdAt": "2025-01-14T08:30:00Z",
+      "approvedBy": "michael-rodriguez",
+      "approvedAt": "2025-01-14T09:15:00Z",
+      "valueDate": "2025-01-14",
+      "bookingDate": "2025-01-14",
+      "urgency": "high",
+      "processingTime": "45 minutes",
+      "fees": {
+        "amount": 25.00,
+        "currency": "USD",
+        "description": "Wire transfer fee"
+      },
+      "auditTrail": [
+        {
+          "timestamp": "2025-01-14T08:30:00Z",
+          "action": "created",
+          "user": "sarah-chen",
+          "details": "Payment instruction created"
+        },
+        {
+          "timestamp": "2025-01-14T09:15:00Z",
+          "action": "approved",
+          "user": "michael-rodriguez",
+          "details": "Compliance review completed"
+        }
+      ]
+    },
+    {
+      "id": "TXN-000002",
+      "messageType": "pain.001",
+      "status": "pending_approval",
+      "amount": 75000.00,
+      "currency": "EUR",
+      "debtorAccount": "SG-001-12345678",
+      "creditorAccount": "DE-003-11223344",
+      "creditorName": "European Suppliers Ltd",
+      "endToEndId": "E2E-ES-20250114-002",
+      "remittanceInfo": "Contract payment CON-2024-789",
+      "requestedExecutionDate": "2025-01-15",
+      "createdBy": "sarah-chen",
+      "createdAt": "2025-01-14T10:45:00Z",
+      "urgency": "normal",
+      "processingTime": "pending",
+      "fees": {
+        "amount": 15.00,
+        "currency": "EUR",
+        "description": "SEPA transfer fee"
+      },
+      "auditTrail": [
+        {
+          "timestamp": "2025-01-14T10:45:00Z",
+          "action": "created",
+          "user": "sarah-chen",
+          "details": "Payment instruction created - awaiting approval"
+        }
+      ]
+    },
+    {
+      "id": "TXN-000003",
+      "messageType": "camt.053",
+      "status": "reconciled",
+      "amount": 200000.00,
+      "currency": "SGD",
+      "account": "SG-001-12345678",
+      "counterpartyAccount": "SG-004-55667788",
+      "counterpartyName": "Singapore Manufacturing Pte Ltd",
+      "reference": "INCOMING-20250114-001",
+      "description": "Customer payment for services",
+      "valueDate": "2025-01-14",
+      "bookingDate": "2025-01-14",
+      "transactionCode": "RCDT",
+      "reconciledBy": "sarah-chen",
+      "reconciledAt": "2025-01-14T11:30:00Z",
+      "matchedTransaction": "TXN-000010",
+      "auditTrail": [
+        {
+          "timestamp": "2025-01-14T09:00:00Z",
+          "action": "received",
+          "user": "system",
+          "details": "Bank statement entry received"
+        },
+        {
+          "timestamp": "2025-01-14T11:30:00Z",
+          "action": "reconciled",
+          "user": "sarah-chen",
+          "details": "Matched with outgoing payment"
+        }
+      ]
+    }
+  ],
+  "accountBalances": {
+    "SG-001-12345678": {
+      "currency": "SGD",
+      "currentBalance": 15750000.00,
+      "availableBalance": 15650000.00,
+      "lastUpdated": "2025-01-14T12:00:00Z"
+    },
+    "US-002-87654321": {
+      "currency": "USD",
+      "currentBalance": 8500000.00,
+      "availableBalance": 8450000.00,
+      "lastUpdated": "2025-01-14T12:00:00Z"
+    },
+    "EUR-003-11223344": {
+      "currency": "EUR",
+      "currentBalance": 6200000.00,
+      "availableBalance": 6180000.00,
+      "lastUpdated": "2025-01-14T12:00:00Z"
+    }
+  },
+  "reconciliationStatus": {
+    "totalTransactions": 1247,
+    "reconciledCount": 1243,
+    "pendingCount": 4,
+    "exceptionCount": 2,
+    "lastReconciliation": "2025-01-14T11:45:00Z",
+    "nextReconciliation": "2025-01-14T15:00:00Z"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "template": {
+    "header": {
+      "reportType": "MAS610",
+      "reportingDate": "2025-07-14",
+      "institutionCode": "DEMO001",
+      "institutionName": "Demo Bank Singapore",
+      "reportingPeriod": "DAILY"
+    },
+    "sections": [
+      {
+        "sectionId": "PAYMENTS",
+        "description": "Payment Transaction Summary",
+        "fields": [
+          "transactionId",
+          "messageType",
+          "amount",
+          "currency",
+          "counterparty",
+          "timestamp",
+          "status"
+        ]
+      },
+      {
+        "sectionId": "EXPOSURES",
+        "description": "Counterparty Exposure Summary",
+        "fields": [
+          "counterpartyId",
+          "totalExposure",
+          "currency",
+          "riskRating",
+          "lastUpdated"
+        ]
+      }
+    ]
+  },
+  "sampleData": {
+    "totalTransactions": 1247,
+    "totalAmount": 156789432.5,
+    "currencies": [
+      "SGD",
+      "USD",
+      "EUR"
+    ],
+    "topCounterparties": [
+      "ABC Manufacturing Pte Ltd",
+      "XYZ Trading Company",
+      "Global Tech Solutions"
+    ],
+    "complianceStatus": "COMPLIANT",
+    "lastGenerated": "2025-07-14T16:47:04.023Z"
+  }
+}

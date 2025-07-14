@@ -1,0 +1,113 @@
+{
+  "regulatoryParameters": {
+    "capitalRequirements": {
+      "minimumCET1Ratio": 6.0,
+      "minimumTier1Ratio": 8.0,
+      "minimumTotalCapitalRatio": 10.0,
+      "capitalConservationBuffer": 2.5,
+      "countercyclicalBuffer": 0.0,
+      "systemicBuffer": 1.0
+    },
+    "liquidityRequirements": {
+      "minimumLCR": 100.0,
+      "minimumNSFR": 100.0,
+      "liquidityBufferRatio": 5.0
+    },
+    "exposureLimits": {
+      "maxExposureToSingleCounterparty": 25.0,
+      "maxExposureToConnectedGroup": 20.0,
+      "maxExposureToFinancialInstitution": 25.0,
+      "maxExposureToSovereign": 100.0
+    },
+    "riskWeights": {
+      "sovereignSingapore": 0.0,
+      "sovereignAAA": 0.0,
+      "sovereignAA": 20.0,
+      "sovereignA": 50.0,
+      "sovereignBBB": 100.0,
+      "bankRiskWeight": 20.0,
+      "corporateRiskWeight": 100.0,
+      "retailRiskWeight": 75.0,
+      "residentialMortgage": 35.0,
+      "commercialRealEstate": 100.0
+    },
+    "hqlaCategories": {
+      "level1Assets": {
+        "haircut": 0.0,
+        "capPercentage": 100.0,
+        "description": "Cash, central bank reserves, high-quality government securities"
+      },
+      "level2AAssets": {
+        "haircut": 15.0,
+        "capPercentage": 40.0,
+        "description": "High-quality corporate bonds, covered bonds"
+      },
+      "level2BAssets": {
+        "haircut": 25.0,
+        "capPercentage": 15.0,
+        "description": "Lower-quality corporate bonds, equities"
+      }
+    },
+    "operationalRisk": {
+      "basicIndicatorApproach": 15.0,
+      "standardizedApproach": {
+        "corporateFinance": 18.0,
+        "tradingAndSales": 18.0,
+        "retailBanking": 12.0,
+        "commercialBanking": 15.0,
+        "paymentAndSettlement": 18.0,
+        "agencyServices": 15.0,
+        "assetManagement": 12.0,
+        "retailBrokerage": 12.0
+      }
+    },
+    "marketRisk": {
+      "standardizedApproach": {
+        "equityRisk": 8.0,
+        "interestRateRisk": 4.0,
+        "foreignExchangeRisk": 8.0,
+        "commodityRisk": 15.0
+      }
+    },
+    "reportingFrequency": {
+      "CAR": "monthly",
+      "LCR": "monthly",
+      "NSFR": "quarterly",
+      "LARGE_EXPOSURES": "quarterly",
+      "MARKET_RISK": "monthly",
+      "OPERATIONAL_RISK": "annually"
+    },
+    "submissionDeadlines": {
+      "CAR": 10,
+      "LCR": 10,
+      "NSFR": 20,
+      "LARGE_EXPOSURES": 20,
+      "MARKET_RISK": 10,
+      "OPERATIONAL_RISK": 90
+    }
+  },
+  "complianceThresholds": {
+    "early_warning": {
+      "tier1Ratio": 8.5,
+      "totalCapitalRatio": 12.0,
+      "lcrRatio": 110.0,
+      "nsfrRatio": 105.0
+    },
+    "action_required": {
+      "tier1Ratio": 8.0,
+      "totalCapitalRatio": 10.0,
+      "lcrRatio": 100.0,
+      "nsfrRatio": 100.0
+    },
+    "critical": {
+      "tier1Ratio": 6.0,
+      "totalCapitalRatio": 8.0,
+      "lcrRatio": 90.0,
+      "nsfrRatio": 90.0
+    }
+  },
+  "lastUpdated": "2025-01-01T00:00:00Z",
+  "version": "3.0",
+  "effectiveDate": "2025-01-01",
+  "source": "MAS Notice 610 (Version 3.0)"
+}

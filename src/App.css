@@ -1,0 +1,23 @@
+/* App.css - Application-specific styles */
+
+/* This file is intentionally minimal since we're using global styles in index.css */
+
+.app-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fafafa;
+}
+
+.loading-spinner {
+  font-size: 18px;
+  color: #1890ff;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}

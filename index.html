@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>General Ledger System - Educational Banking Platform</title>
+    <meta name="description" content="Educational General Ledger System demonstrating financial workflows, ISO 20022 messaging, and MAS 610 regulatory reporting" />
+    <meta name="author" content="General Ledger System Team" />
+    <meta name="keywords" content="general ledger, financial system, iso 20022, mas 610, banking, compliance, regulatory reporting" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://siva-sub.github.io/general-ledger-system/" />
+    <meta property="og:title" content="General Ledger System - Educational Banking Platform" />
+    <meta property="og:description" content="Educational General Ledger System demonstrating financial workflows, ISO 20022 messaging, and MAS 610 regulatory reporting" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://siva-sub.github.io/general-ledger-system/" />
+    <meta property="twitter:title" content="General Ledger System - Educational Banking Platform" />
+    <meta property="twitter:description" content="Educational General Ledger System demonstrating financial workflows, ISO 20022 messaging, and MAS 610 regulatory reporting" />
+    
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Security headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <style>
+      /* Loading screen styles */
+      #loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #1890ff;
+      }
+      
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #1890ff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 16px;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Hide loading screen when app loads */
+      #root:not(:empty) + #loading {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="loading">
+      <div class="loading-spinner"></div>
+      <span>Loading General Ledger System...</span>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

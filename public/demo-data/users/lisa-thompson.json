@@ -1,0 +1,16 @@
+{
+  "id": "lisa-thompson",
+  "name": "Lisa Thompson",
+  "role": "Treasury Manager",
+  "email": "lisa.thompson@demobank.com",
+  "permissions": [
+    "treasury",
+    "liquidity",
+    "reporting"
+  ],
+  "defaultDashboard": "treasury",
+  "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisa",
+  "department": "Treasury Management",
+  "joinDate": "2018-07-22",
+  "lastLogin": "2025-07-14T16:17:04.010Z"
+}

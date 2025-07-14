@@ -1,0 +1,42 @@
+{
+  "id": "regulatory-reporting",
+  "title": "MAS 610 Regulatory Reporting",
+  "description": "Generate and submit regulatory reports to MAS as required by MAS 610.",
+  "estimatedTime": 480,
+  "difficulty": "advanced",
+  "tags": [
+    "compliance",
+    "mas610",
+    "reporting"
+  ],
+  "steps": [
+    {
+      "persona": "michael-rodriguez",
+      "action": "prepare-data",
+      "description": "Prepare transaction data for MAS 610 reporting",
+      "expectedOutcome": "Data extracted and validated",
+      "duration": 120
+    },
+    {
+      "persona": "michael-rodriguez",
+      "action": "generate-reports",
+      "description": "Generate regulatory reports using MAS 610 templates",
+      "expectedOutcome": "Reports generated and validated",
+      "duration": 180
+    },
+    {
+      "persona": "lisa-thompson",
+      "action": "review-reports",
+      "description": "Review reports for accuracy and completeness",
+      "expectedOutcome": "Reports approved for submission",
+      "duration": 120
+    },
+    {
+      "persona": "michael-rodriguez",
+      "action": "submit-reports",
+      "description": "Submit reports to MAS through secure channel",
+      "expectedOutcome": "Reports successfully submitted",
+      "duration": 60
+    }
+  ]
+}

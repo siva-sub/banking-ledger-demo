@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2025-07-14T16:47:04.023Z",
+  "personas": 5,
+  "transactions": 1000,
+  "scenarios": 3,
+  "messageTypes": [
+    "pain.001",
+    "camt.054",
+    "camt.053",
+    "pain.002"
+  ],
+  "totalAmount": 526735884,
+  "currencies": [
+    "USD",
+    "GBP",
+    "SGD",
+    "EUR",
+    "JPY"
+  ]
+}
