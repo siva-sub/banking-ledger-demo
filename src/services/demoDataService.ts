@@ -35,7 +35,7 @@ export const loadDemoDataSettings = (): DemoDataSettings => {
       return { ...DEFAULT_DEMO_SETTINGS, ...parsed };
     }
   } catch (error) {
-    console.warn('Failed to load demo data settings:', error);
+    // Failed to load demo data settings - using defaults
   }
   return DEFAULT_DEMO_SETTINGS;
 };
@@ -52,7 +52,7 @@ export const saveDemoDataSettings = (settings: DemoDataSettings): void => {
     };
     localStorage.setItem('demoDataSettings', JSON.stringify(toStore));
   } catch (error) {
-    console.error('Failed to save demo data settings:', error);
+    // Failed to save demo data settings
   }
 };
 

@@ -8,6 +8,8 @@ import { TransactionsPage } from './components/common/TransactionsPage';
 import { ReportsPage } from './components/common/ReportsPage';
 import { AnalyticsPage } from './components/common/AnalyticsPage';
 import { SettingsPage } from './components/common/SettingsPage';
+import { MAS610Module } from './components/regulatory/MAS610Module';
+import { ValidationDashboard } from './components/regulatory/ValidationDashboard';
 import { PersonaManager } from './components/demo/PersonaManager';
 import { AppProvider, useAppContext } from './contexts/AppContext';
 import { ErrorBoundary, FinancialErrorBoundary } from './components/common/ErrorBoundary';
@@ -50,6 +52,8 @@ const AppContent: React.FC = () => {
                   <Route path="/transactions" element={<TransactionsPage />} />
                   <Route path="/reports" element={<ReportsPage />} />
                   <Route path="/analytics" element={<AnalyticsPage />} />
+                  <Route path="/regulatory/mas610" element={<MAS610Module />} />
+                  <Route path="/regulatory/validation" element={<ValidationDashboard />} />
                   <Route path="/settings" element={<SettingsPage />} />
                   <Route path="/personas" element={<PersonaManager />} />
                 </Routes>

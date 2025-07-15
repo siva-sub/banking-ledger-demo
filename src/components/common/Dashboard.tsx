@@ -1,13 +1,20 @@
-import React from 'react';
-import { Card, Row, Col, Typography, Statistic, Table, Tag } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Card, Row, Col, Typography, Statistic, Table, Tag, Progress, Alert, Button, Space } from 'antd';
 import { 
   DollarOutlined, 
   TransactionOutlined, 
   CheckCircleOutlined, 
   ClockCircleOutlined,
-  FileTextOutlined
+  FileTextOutlined,
+  WarningOutlined,
+  BankOutlined,
+  AlertOutlined,
+  CalendarOutlined,
+  TrophyOutlined
 } from '@ant-design/icons';
 import { usePersona } from '@/hooks/usePersona';
+import { useAppContext } from '../../contexts/AppContext';
+import { loadDemoDataSettings, generateDynamicAnalyticsData } from '../../services/demoDataService';
 
 const { Title, Paragraph } = Typography;
 
@@ -96,20 +103,77 @@ const columns = [
 
 export const Dashboard: React.FC = () => {
   const { currentPersona } = usePersona();
+  const { state } = useAppContext();
+  const [analyticsData, setAnalyticsData] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Load dynamic analytics data based on demo settings
+    const demoSettings = loadDemoDataSettings();
+    const data = generateDynamicAnalyticsData(demoSettings);
+    setAnalyticsData(data);
+  }, []);
+
+  // Enhanced financial ratios and regulatory data
+  const getFinancialRatios = () => {
+    const latest = analyticsData[analyticsData.length - 1];
+    return {
+      nim: 2.85, // Net Interest Margin
+      roe: 12.4, // Return on Equity  
+      costToIncome: 65.2, // Cost to Income Ratio
+      tier1Ratio: 15.2, // Tier 1 Capital Ratio
+      lcrRatio: 116.7, // Liquidity Coverage Ratio
+      complianceScore: latest?.complianceScore || 98.5
+    };
+  };
+
+  const getRegulatoryStatus = () => {
+    return {
+      mas610Status: [
+        { name: 'Appendix B2 Part I - Monthly', status: 'completed', dueDate: '2025-07-20' },
+        { name: 'Appendix D1 - Quarterly', status: 'in_progress', dueDate: '2025-07-25' },
+        { name: 'Appendix D3 - Assets by Sector', status: 'validation', dueDate: '2025-07-20' },
+        { name: 'Appendix F - Credit Risk', status: 'pending', dueDate: '2025-07-30' }
+      ],
+      alerts: [
+        { type: 'warning', message: '15 counterparties missing SSIC codes for Appendix D3' },
+        { type: 'info', message: 'MAS 610 Appendix B2 ready for submission' },
+        { type: 'error', message: 'Intercompany mismatch detected: SGD 45,000' }
+      ]
+    };
+  };
+
+  const getMonthEndCloseStatus = () => {
+    return [
+      { task: 'Sub-ledger feeds closed', status: 'completed', progress: 100 },
+      { task: 'Accruals posted', status: 'completed', progress: 100 },
+      { task: 'Reconciliations complete', status: 'in_progress', progress: 78 },
+      { task: 'FX revaluation run', status: 'pending', progress: 0 },
+      { task: 'Intercompany elimination', status: 'pending', progress: 0 },
+      { task: 'Management reports', status: 'pending', progress: 0 }
+    ];
+  };
 
   const getPersonalizedContent = () => {
     if (!currentPersona) return null;
+    
+    const ratios = getFinancialRatios();
+    const regulatory = getRegulatoryStatus();
+    const closeStatus = getMonthEndCloseStatus();
 
     switch (currentPersona.role) {
       case 'Financial Operations Manager':
         return {
-          title: 'Operations Dashboard',
-          description: 'Monitor daily payment operations, reconciliation status, and transaction processing.',
+          title: 'Controller\'s Dashboard - CFO Command Centre',
+          description: 'Real-time financial ratios, month-end close status, and regulatory reporting overview for executive decision making.',
+          type: 'controller',
+          ratios,
+          regulatory,
+          closeStatus,
           stats: [
-            { title: 'Today\'s Transactions', value: 1247, prefix: <TransactionOutlined /> },
-            { title: 'Total Amount', value: 15678943, prefix: <DollarOutlined />, suffix: 'SGD' },
-            { title: 'Completed', value: 1098, prefix: <CheckCircleOutlined /> },
-            { title: 'Pending', value: 149, prefix: <ClockCircleOutlined /> },
+            { title: 'Net Interest Margin', value: ratios.nim, suffix: '%', prefix: <BankOutlined /> },
+            { title: 'Return on Equity', value: ratios.roe, suffix: '%', prefix: <TrophyOutlined /> },
+            { title: 'Cost-to-Income Ratio', value: ratios.costToIncome, suffix: '%', prefix: <DollarOutlined /> },
+            { title: 'Tier 1 Capital Ratio', value: ratios.tier1Ratio, suffix: '%', prefix: <CheckCircleOutlined /> },
           ],
         };
       case 'Compliance Officer':
@@ -150,6 +214,104 @@ export const Dashboard: React.FC = () => {
 
   const content = getPersonalizedContent();
 
+  // Enhanced render for Controller dashboard
+  const renderControllerDashboard = () => {
+    if (content?.type !== 'controller') return null;
+
+    return (
+      <>
+        {/* Financial Ratios Section */}
+        <Card title="Key Financial Ratios" style={{ marginBottom: 16 }}>
+          <Row gutter={[16, 16]}>
+            {content.stats.map((stat, index) => (
+              <Col xs={24} sm={12} md={6} key={index}>
+                <Statistic
+                  title={stat.title}
+                  value={stat.value}
+                  prefix={stat.prefix}
+                  suffix={stat.suffix}
+                  valueStyle={{ color: stat.value > 10 ? '#3f8600' : '#1890ff' }}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Card>
+
+        {/* Month-End Close Status */}
+        <Card title="Month-End Close Status" style={{ marginBottom: 16 }}>
+          <Row gutter={[16, 16]}>
+            {content.closeStatus.map((item, index) => (
+              <Col xs={24} md={12} key={index}>
+                <div style={{ marginBottom: 16 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                    <span>{item.task}</span>
+                    <Tag color={item.status === 'completed' ? 'green' : item.status === 'in_progress' ? 'blue' : 'orange'}>
+                      {item.status.replace('_', ' ').toUpperCase()}
+                    </Tag>
+                  </div>
+                  <Progress 
+                    percent={item.progress} 
+                    strokeColor={item.status === 'completed' ? '#52c41a' : '#1890ff'}
+                    showInfo={false}
+                  />
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Card>
+
+        {/* Regulatory Reporting Widget */}
+        <Row gutter={16} style={{ marginBottom: 16 }}>
+          <Col xs={24} lg={16}>
+            <Card title="MAS 610 Regulatory Reports">
+              <div style={{ marginBottom: 16 }}>
+                {content.regulatory.mas610Status.map((report, index) => (
+                  <div key={index} style={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
+                    padding: '8px 0',
+                    borderBottom: index < content.regulatory.mas610Status.length - 1 ? '1px solid #f0f0f0' : 'none'
+                  }}>
+                    <div>
+                      <div style={{ fontWeight: 500 }}>{report.name}</div>
+                      <div style={{ fontSize: '12px', color: '#8c8c8c' }}>Due: {report.dueDate}</div>
+                    </div>
+                    <Tag color={
+                      report.status === 'completed' ? 'green' :
+                      report.status === 'validation' ? 'orange' :
+                      report.status === 'in_progress' ? 'blue' : 'red'
+                    }>
+                      {report.status.replace('_', ' ').toUpperCase()}
+                    </Tag>
+                  </div>
+                ))}
+              </div>
+              <Button type="primary" icon={<FileTextOutlined />}>
+                View All Reports
+              </Button>
+            </Card>
+          </Col>
+          <Col xs={24} lg={8}>
+            <Card title="Data Quality Alerts">
+              <Space direction="vertical" style={{ width: '100%' }}>
+                {content.regulatory.alerts.map((alert, index) => (
+                  <Alert
+                    key={index}
+                    message={alert.message}
+                    type={alert.type as 'success' | 'warning' | 'error' | 'info'}
+                    showIcon
+                    style={{ fontSize: '12px' }}
+                  />
+                ))}
+              </Space>
+            </Card>
+          </Col>
+        </Row>
+      </>
+    );
+  };
+
   return (
     <div style={{ padding: '24px' }}>
       <div style={{ marginBottom: '24px' }}>
@@ -157,21 +319,24 @@ export const Dashboard: React.FC = () => {
         <Paragraph type="secondary">{content?.description}</Paragraph>
       </div>
 
-      <Row gutter={[16, 16]} style={{ marginBottom: '24px' }}>
-        {content?.stats.map((stat, index) => (
-          <Col xs={24} sm={12} md={6} key={index}>
-            <Card>
-              <Statistic
-                title={stat.title}
-                value={stat.value}
-                prefix={stat.prefix}
-                suffix={stat.suffix}
-                valueStyle={{ color: '#1890ff' }}
-              />
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      {/* Controller Dashboard or Standard Dashboard */}
+      {content?.type === 'controller' ? renderControllerDashboard() : (
+        <Row gutter={[16, 16]} style={{ marginBottom: '24px' }}>
+          {content?.stats.map((stat, index) => (
+            <Col xs={24} sm={12} md={6} key={index}>
+              <Card>
+                <Statistic
+                  title={stat.title}
+                  value={stat.value}
+                  prefix={stat.prefix}
+                  suffix={stat.suffix}
+                  valueStyle={{ color: '#1890ff' }}
+                />
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
 
       <Card 
         title="Recent Transactions" 

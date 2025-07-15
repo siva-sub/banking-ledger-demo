@@ -7,7 +7,8 @@ import {
   FileTextOutlined, 
   UserSwitchOutlined,
   BarChartOutlined,
-  SettingOutlined 
+  SettingOutlined,
+  AuditOutlined
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -37,6 +38,21 @@ export const AppSider: React.FC = () => {
       key: '/analytics',
       icon: <BarChartOutlined />,
       label: 'Analytics',
+    },
+    {
+      key: 'regulatory',
+      icon: <AuditOutlined />,
+      label: 'Regulatory',
+      children: [
+        {
+          key: '/regulatory/mas610',
+          label: 'MAS 610 Reports',
+        },
+        {
+          key: '/regulatory/validation',
+          label: 'Validation Engine',
+        },
+      ],
     },
     {
       key: '/personas',
