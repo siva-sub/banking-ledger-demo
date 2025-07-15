@@ -256,16 +256,17 @@ export const ReportsPage: React.FC = () => {
               <List.Item
                 actions={[
                   <Button 
+                    key="download"
                     type="primary" 
                     icon={<DownloadOutlined />}
                     disabled={report.status !== 'ready'}
                   >
                     Download
                   </Button>,
-                  <Button type="link">
+                  <Button key="schedule" type="link">
                     Schedule
                   </Button>,
-                  <Button type="link">
+                  <Button key="history" type="link">
                     History
                   </Button>,
                 ]}

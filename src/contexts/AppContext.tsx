@@ -287,7 +287,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     };
     
     initializeApp();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   // Persist state to localStorage
