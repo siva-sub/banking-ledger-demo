@@ -4,6 +4,9 @@ import { Layout, Spin } from 'antd';
 import { AppHeader } from './components/common/AppHeader';
 import { AppSider } from './components/common/AppSider';
 import { Dashboard } from './components/common/Dashboard';
+import { TransactionsPage } from './components/common/TransactionsPage';
+import { ReportsPage } from './components/common/ReportsPage';
+import { AnalyticsPage } from './components/common/AnalyticsPage';
 import { PersonaManager } from './components/demo/PersonaManager';
 import { AppProvider, useAppContext } from './contexts/AppContext';
 import { ErrorBoundary, FinancialErrorBoundary } from './components/common/ErrorBoundary';
@@ -42,9 +45,11 @@ const AppContent: React.FC = () => {
               <FinancialErrorBoundary>
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
-                  <Route path="/personas" element={<PersonaManager />} />
                   <Route path="/dashboard" element={<Dashboard />} />
-                  {/* Additional routes will be added as features are implemented */}
+                  <Route path="/transactions" element={<TransactionsPage />} />
+                  <Route path="/reports" element={<ReportsPage />} />
+                  <Route path="/analytics" element={<AnalyticsPage />} />
+                  <Route path="/personas" element={<PersonaManager />} />
                 </Routes>
               </FinancialErrorBoundary>
             </div>

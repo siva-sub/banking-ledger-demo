@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Educational General Ledger System demonstrating financial workflows, ISO 20022 messaging, and MAS 610 regulatory reporting",
-  "homepage": "https://siva-sub.github.io/general-ledger-system",
+  "homepage": "https://siva-sub.github.io/banking-ledger-demo",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -79,9 +79,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/siva-sub/general-ledger-system.git"
+    "url": "https://github.com/siva-sub/banking-ledger-demo.git"
   },
   "bugs": {
-    "url": "https://github.com/siva-sub/general-ledger-system/issues"
+    "url": "https://github.com/siva-sub/banking-ledger-demo/issues"
   }
 }

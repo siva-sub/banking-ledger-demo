@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Typography, Space, Button, Avatar } from 'antd';
 import { UserOutlined, SettingOutlined } from '@ant-design/icons';
-import { PersonaType } from '../../types/persona';
+import { PersonaType, PERSONAS } from '../../constants/personas';
 
 const { Header } = Layout;
 const { Text } = Typography;
@@ -11,6 +11,7 @@ interface AppHeaderProps {
 }
 
 export const AppHeader: React.FC<AppHeaderProps> = ({ currentPersona }) => {
+  const personaConfig = currentPersona ? PERSONAS[currentPersona] : null;
   return (
     <Header style={{ 
       display: 'flex', 
@@ -42,12 +43,17 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ currentPersona }) => {
           <Avatar 
             size="small" 
             icon={<UserOutlined />}
-            src={(currentPersona as any)?.avatar}
-          />
+            style={{ 
+              backgroundColor: personaConfig?.color,
+              fontSize: '16px'
+            }}
+          >
+            {personaConfig?.avatar}
+          </Avatar>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <Text strong>{(currentPersona as any)?.name || 'Loading...'}</Text>
+            <Text strong>{personaConfig?.name || 'Loading...'}</Text>
             <Text type="secondary" style={{ fontSize: '12px' }}>
-              {(currentPersona as any)?.role || ''}
+              {personaConfig?.title || ''}
             </Text>
           </div>
         </Space>

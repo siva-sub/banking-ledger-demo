@@ -19,10 +19,10 @@ interface DemoPersona {
   lastLogin: string;
 }
 
-// Mock personas for demonstration
+// Mock personas for demonstration - mapped to actual PersonaType IDs
 const mockPersonas: DemoPersona[] = [
   {
-    id: 'sarah-chen',
+    id: 'financial-ops',
     name: 'Sarah Chen',
     role: 'Financial Operations Manager',
     email: 'sarah.chen@demobank.com',
@@ -34,7 +34,7 @@ const mockPersonas: DemoPersona[] = [
     lastLogin: new Date().toISOString(),
   },
   {
-    id: 'michael-rodriguez',
+    id: 'compliance',
     name: 'Michael Rodriguez',
     role: 'Compliance Officer',
     email: 'michael.rodriguez@demobank.com',
@@ -46,22 +46,22 @@ const mockPersonas: DemoPersona[] = [
     lastLogin: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 'lisa-thompson',
-    name: 'Lisa Thompson',
+    id: 'treasury',
+    name: 'Jennifer Park',
     role: 'Treasury Manager',
-    email: 'lisa.thompson@demobank.com',
+    email: 'jennifer.park@demobank.com',
     permissions: ['treasury', 'liquidity', 'reporting'],
     defaultDashboard: 'treasury',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=lisa',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=jennifer',
     department: 'Treasury Management',
     joinDate: '2018-07-22',
     lastLogin: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
   },
   {
-    id: 'david-park',
-    name: 'David Park',
+    id: 'risk-analyst',
+    name: 'David Kumar',
     role: 'Risk Management Analyst',
-    email: 'david.park@demobank.com',
+    email: 'david.kumar@demobank.com',
     permissions: ['risk', 'analytics', 'reporting'],
     defaultDashboard: 'risk',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=david',
@@ -70,13 +70,13 @@ const mockPersonas: DemoPersona[] = [
     lastLogin: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
   },
   {
-    id: 'anna-mueller',
-    name: 'Anna Mueller',
+    id: 'system-admin',
+    name: 'Alex Thompson',
     role: 'System Administrator',
-    email: 'anna.mueller@demobank.com',
+    email: 'alex.thompson@demobank.com',
     permissions: ['admin', 'system', 'users', 'reporting'],
     defaultDashboard: 'admin',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=anna',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alex',
     department: 'IT Operations',
     joinDate: '2017-04-18',
     lastLogin: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
