@@ -7,6 +7,7 @@ import { Dashboard } from './components/common/Dashboard';
 import { TransactionsPage } from './components/common/TransactionsPage';
 import { ReportsPage } from './components/common/ReportsPage';
 import { AnalyticsPage } from './components/common/AnalyticsPage';
+import { SettingsPage } from './components/common/SettingsPage';
 import { PersonaManager } from './components/demo/PersonaManager';
 import { AppProvider, useAppContext } from './contexts/AppContext';
 import { ErrorBoundary, FinancialErrorBoundary } from './components/common/ErrorBoundary';
@@ -49,6 +50,7 @@ const AppContent: React.FC = () => {
                   <Route path="/transactions" element={<TransactionsPage />} />
                   <Route path="/reports" element={<ReportsPage />} />
                   <Route path="/analytics" element={<AnalyticsPage />} />
+                  <Route path="/settings" element={<SettingsPage />} />
                   <Route path="/personas" element={<PersonaManager />} />
                 </Routes>
               </FinancialErrorBoundary>

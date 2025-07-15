@@ -556,7 +556,12 @@ body {
   }
 }
 
-/* Dark Mode Support */
+/* Force Light Mode - Override system dark mode preferences */
+/* 
+  Commented out dark mode support to ensure consistent light theme
+  regardless of user's system/browser dark mode preferences
+*/
+/*
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #141414;
@@ -589,4 +594,23 @@ body {
   .dashboard-widget {
     background-color: #262626;
   }
+}
+*/
+
+/* Force light theme colors for better readability */
+html {
+  color-scheme: light !important;
+}
+
+body {
+  background-color: #ffffff !important;
+  color: #262626 !important;
+}
+
+.site-layout {
+  background-color: #f0f2f5 !important;
+}
+
+.site-layout-background {
+  background-color: #ffffff !important;
 }
