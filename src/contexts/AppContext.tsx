@@ -275,7 +275,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         }
         
         // If no persisted persona, default to the first one for demo
-        if (!state.currentPersona) {
+        if (!parsed?.currentPersona) {
           dispatch({ type: 'SET_PERSONA', payload: DEFAULT_PERSONA });
         }
       } catch (error) {

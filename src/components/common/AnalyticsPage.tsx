@@ -3,7 +3,7 @@ import { Card, Row, Col, Typography, Statistic, Progress, Space, Select, DatePic
 import { 
   ArrowUpOutlined, 
   ArrowDownOutlined,
-  TrendingUpOutlined,
+  RiseOutlined,
   DollarOutlined,
   TransactionOutlined,
   GlobalOutlined,
@@ -139,7 +139,7 @@ export const AnalyticsPage: React.FC = () => {
               value={analyticsData.transactions.completionRate}
               precision={1}
               valueStyle={{ color: '#722ed1' }}
-              prefix={<TrendingUpOutlined />}
+              prefix={<RiseOutlined />}
               suffix="%"
             />
           </Card>
@@ -350,7 +350,7 @@ export const AnalyticsPage: React.FC = () => {
           <Col span={8}>
             <div style={{ padding: 16, backgroundColor: '#f0f5ff', borderRadius: 6, border: '1px solid #adc6ff' }}>
               <div style={{ marginBottom: 8 }}>
-                <TrendingUpOutlined style={{ color: '#1890ff' }} />
+                <RiseOutlined style={{ color: '#1890ff' }} />
                 <Text strong style={{ marginLeft: 8, color: '#1890ff' }}>Compliance Excellence</Text>
               </div>
               <Text>
