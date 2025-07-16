@@ -92,3 +92,17 @@ src/**/*.test.tsx
 src/**/*.test.ts
 src/setupTests.ts
 jest.config.js
+
+# Documentation and analysis files
+*_SUMMARY.md
+*_IMPLEMENTATION.md
+*_SYSTEM.md
+*_FEATURES.md
+*_STATUS.md
+*_FIXES_SUMMARY.md
+*_TRANSFORMATION_SUMMARY.md
+*_FLOW_IMPLEMENTATION.md
+*_ENHANCEMENTS.md
+docs/
+mas610_analysis_report.md
+mas610_schema_analyzer.py
