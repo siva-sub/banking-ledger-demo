@@ -33,9 +33,30 @@ import { mas610SchemaValidator, ValidationContext, DetailedValidationError } fro
 import { mas610XMLGenerator, XMLGenerationOptions } from './mas610/xmlGenerator';
 import { vrrValidators } from './mas610/vrrValidators';
 
-// Import analysis results
-import { MAS610Analysis } from '../xml-schema-excel-submission-template-mapping-aug-2022_types';
-import { MAS610PDFAnalysis } from '../MAS 610 Reporting Form 2024  Clean_interfaces';
+// Analysis interface definitions (local implementation)
+interface MAS610Analysis {
+  schemaMappings: any[];
+  validationRules: any[];
+  businessRules: any[];
+  dataTypes: Record<string, any>;
+  submissionTemplates: Record<string, any>;
+}
+
+interface MAS610PDFAnalysis {
+  fileInfo: {
+    fileName: string;
+    fileSize: number;
+    pagesCount: number;
+    title: string;
+    author: string;
+    creationDate: string;
+  };
+  formSections: any[];
+  dataFields: any[];
+  tables: any[];
+  validationRules: any[];
+  businessRules: any[];
+}
 
 /**
  * Enhanced MAS 610 Regulatory Reporting Service
