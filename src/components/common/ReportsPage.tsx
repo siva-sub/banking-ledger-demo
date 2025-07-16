@@ -63,7 +63,7 @@ export const ReportsPage: React.FC = () => {
       setReports(prev => ({ ...prev, mas610: generatedReport }));
     } catch (e) {
       setError('Failed to generate MAS 610 report.');
-      console.error(e);
+      // Export error
     } finally {
       setLoading(null);
     }
@@ -121,7 +121,7 @@ export const ReportsPage: React.FC = () => {
       setReports(prev => ({ ...prev, balanceSheet }));
     } catch (e) {
       setError('Failed to generate Balance Sheet report.');
-      console.error(e);
+      // Export error
     } finally {
       setLoading(null);
     }
@@ -170,7 +170,7 @@ export const ReportsPage: React.FC = () => {
       setReports(prev => ({ ...prev, profitLoss }));
     } catch (e) {
       setError('Failed to generate Profit & Loss report.');
-      console.error(e);
+      // Export error
     } finally {
       setLoading(null);
     }
@@ -235,7 +235,7 @@ export const ReportsPage: React.FC = () => {
       setReports(prev => ({ ...prev, cashFlow }));
     } catch (e) {
       setError('Failed to generate Cash Flow report.');
-      console.error(e);
+      // Export error
     } finally {
       setLoading(null);
     }
@@ -269,7 +269,7 @@ export const ReportsPage: React.FC = () => {
       setReports(prev => ({ ...prev, analytics: analyticsReport }));
     } catch (e) {
       setError('Failed to generate Analytics report.');
-      console.error(e);
+      // Export error
     } finally {
       setLoading(null);
     }

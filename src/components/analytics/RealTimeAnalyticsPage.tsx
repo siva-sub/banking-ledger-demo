@@ -56,7 +56,7 @@ export const RealTimeAnalyticsPage: React.FC = () => {
   const analyticsSync = useAnalyticsSync(
     'real-time-analytics-page',
     useCallback((data: any) => {
-      console.log('📊 Analytics received real-time update:', data);
+      // Analytics received real-time update
       refreshAnalyticsData();
     }, [])
   );
@@ -64,7 +64,7 @@ export const RealTimeAnalyticsPage: React.FC = () => {
   const chartSync = useChartSync(
     'analytics-charts',
     useCallback((interaction: any) => {
-      console.log('📈 Chart interaction received:', interaction);
+      // Chart interaction received
       handleChartInteraction(interaction);
     }, [])
   );
@@ -80,7 +80,7 @@ export const RealTimeAnalyticsPage: React.FC = () => {
       analyticsSync.emitAnalyticsUpdate(data, filters);
       
     } catch (error) {
-      console.error('Analytics refresh failed:', error);
+      // Analytics refresh failed
     } finally {
       setLoading(false);
     }
@@ -234,7 +234,7 @@ export const RealTimeAnalyticsPage: React.FC = () => {
               </Button>
               <Button 
                 icon={<ExportOutlined />}
-                onClick={() => console.log('Export functionality')}
+                onClick={() => {/* Export functionality */}}
               >
                 Export
               </Button>

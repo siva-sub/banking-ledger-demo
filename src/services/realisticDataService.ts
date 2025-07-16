@@ -5,14 +5,9 @@ import { journalDemoDataService } from './journalDemoDataService';
 import { bankingTransactionService } from './bankingTransactionService';
 
 const generateInitialData = () => {
-    console.log('🚀 Starting realistic data generation...');
+    // Starting realistic data generation
     const demoData = generateAdvancedDemoData();
-    console.log('📊 Demo data generated:', {
-        counterparties: demoData.counterparties?.length || 0,
-        facilities: demoData.facilities?.length || 0,
-        glTransactions: demoData.glTransactions?.length || 0,
-        derivatives: demoData.derivatives?.length || 0
-    });
+    // Demo data generated
 
     // 1. Create Banking Chart of Accounts (proper banking structure)
     const bankingChartOfAccounts = [
@@ -113,7 +108,7 @@ const generateInitialData = () => {
     ];
 
     // Create all banking accounts
-    console.log(`🏦 Creating ${bankingChartOfAccounts.length} banking accounts...`);
+    // Creating banking accounts
     bankingChartOfAccounts.forEach(account => {
         glService.createAccount(account);
     });
@@ -132,7 +127,7 @@ const generateInitialData = () => {
 
     // 3. Post GL Transactions (if they exist)
     if (demoData.glTransactions && Array.isArray(demoData.glTransactions)) {
-        console.log(`📝 Processing ${demoData.glTransactions.length} GL transactions...`);
+        // Processing GL transactions
         
         let successCount = 0;
         let errorCount = 0;
@@ -168,35 +163,35 @@ const generateInitialData = () => {
             } catch (error) {
                 errorCount++;
                 if (errorCount <= 5) { // Only log first 5 errors to avoid spam
-                    console.warn(`⚠️ Failed to create journal entry for transaction ${index + 1}:`, error);
+                    // Failed to create journal entry for transaction
                 }
             }
         });
         
-        console.log(`✅ Successfully processed ${successCount} GL transactions`);
+        // Successfully processed GL transactions
         if (errorCount > 0) {
-            console.log(`⚠️ Failed to process ${errorCount} transactions`);
+            // Failed to process transactions
         }
     } else {
-        console.log('ℹ️ No GL transactions found in demo data');
+        // No GL transactions found in demo data
     }
     
     // 4. Generate realistic banking transactions following proper flow
-    console.log('🏦 Generating realistic banking transactions...');
+    // Generating realistic banking transactions
     try {
         // Generate banking transactions following: Daily Transactions → Sub-Ledgers → Journal Entries → General Ledger
         const bankingResults = bankingTransactionService.generateBankingTransactions(500);
-        console.log(`✅ Generated ${bankingResults.length} banking transactions following proper flow`);
+        // Generated banking transactions following proper flow
         
         // Generate additional journal entries for comprehensive demo
         journalDemoDataService.initializeDemoData(500); // Generate 500 additional journal entries
-        console.log('✅ Successfully generated additional journal entries');
+        // Successfully generated additional journal entries
     } catch (error) {
-        console.error('❌ Error generating banking transactions:', error);
+        // Error generating banking transactions
     }
     
     // 5. Create initial equity balances for proper banking balance sheet
-    console.log('💰 Creating initial equity balances...');
+    // Creating initial equity balances
     try {
         const currentYear = new Date().getFullYear();
         const equityEntries = [
@@ -251,15 +246,15 @@ const generateInitialData = () => {
             try {
                 const entry = glService.createJournalEntry(entryData);
                 glService.postJournalEntry(entry.entryId);
-                console.log(`✅ Created equity entry ${index + 1}: ${entryData.description}`);
+                // Created equity entry
             } catch (error) {
-                console.warn(`⚠️ Failed to create equity entry ${index + 1}:`, error);
+                // Failed to create equity entry
             }
         });
         
-        console.log('✅ Successfully created initial equity balances');
+        // Successfully created initial equity balances
     } catch (error) {
-        console.error('❌ Error creating equity balances:', error);
+        // Error creating equity balances
     }
 };
 

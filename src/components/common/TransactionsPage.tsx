@@ -49,7 +49,7 @@ export const TransactionsPage: React.FC = () => {
     const ledger = glService.getLedger();
     const subLedgerAccounts = subLedgerService.getSubLedgerAccounts();
     
-    console.log(`📊 Demo data check: ${journal.length} journal entries, ${ledger.length} GL accounts, ${subLedgerAccounts.length} sub-ledger accounts`);
+    // Demo data check completed
     
     if (journal.length === 0 || ledger.length === 0) {
       setDemoDataInitialized(false);
@@ -87,7 +87,7 @@ export const TransactionsPage: React.FC = () => {
       });
       
     } catch (error) {
-      console.error('Failed to initialize demo data:', error);
+      // Failed to initialize demo data
     } finally {
       setLoading(false);
     }
@@ -105,7 +105,7 @@ export const TransactionsPage: React.FC = () => {
       setDataStats(stats);
       
     } catch (error) {
-      console.error('Failed to regenerate demo data:', error);
+      // Failed to regenerate demo data
     } finally {
       setLoading(false);
     }

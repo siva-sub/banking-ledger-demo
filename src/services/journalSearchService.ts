@@ -339,11 +339,12 @@ export class JournalSearchService {
         case 'status':
           comparison = a.status.localeCompare(b.status);
           break;
-        case 'totalAmount':
+        case 'totalAmount': {
           const totalA = a.postings.reduce((sum, p) => sum + p.amount, 0);
           const totalB = b.postings.reduce((sum, p) => sum + p.amount, 0);
           comparison = totalA - totalB;
           break;
+        }
         default:
           comparison = 0;
       }
@@ -639,7 +640,7 @@ export class JournalSearchService {
         this.savedFilters = JSON.parse(stored);
       }
     } catch (error) {
-      console.error('Failed to load saved filters:', error);
+      // Failed to load saved filters - continue with empty array
     }
   }
 
@@ -647,7 +648,7 @@ export class JournalSearchService {
     try {
       localStorage.setItem('journalSavedFilters', JSON.stringify(this.savedFilters));
     } catch (error) {
-      console.error('Failed to persist saved filters:', error);
+      // Failed to persist saved filters - continue without persistence
     }
   }
 

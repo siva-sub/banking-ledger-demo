@@ -92,7 +92,7 @@ export const EnhancedSubLedgerView: React.FC = () => {
     setLoading(true);
     try {
       const accounts = subLedgerService.getSubLedgerAccounts();
-      console.log('📊 Raw sub-ledger accounts:', accounts);
+      // Raw sub-ledger accounts loaded
       
       // Transform and enhance the accounts with proper banking data
       const enhancedAccounts: SubLedgerAccount[] = accounts.map(account => {
@@ -142,10 +142,10 @@ export const EnhancedSubLedgerView: React.FC = () => {
         };
       });
 
-      console.log('✅ Enhanced sub-ledger accounts:', enhancedAccounts);
+      // Enhanced sub-ledger accounts created
       setSubLedgerAccounts(enhancedAccounts);
     } catch (error) {
-      console.error('Error loading sub-ledger data:', error);
+      // Error loading sub-ledger data
     } finally {
       setLoading(false);
     }

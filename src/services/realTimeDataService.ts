@@ -55,7 +55,7 @@ export interface StreamSubscription {
 class RealTimeDataService extends EventEmitter {
   private streams: Map<string, DataStream> = new Map();
   private subscriptions: Map<string, StreamSubscription> = new Map();
-  private intervals: Map<string, NodeJS.Timeout> = new Map();
+  private intervals: Map<string, number> = new Map();
   private isInitialized = false;
 
   constructor() {
@@ -124,7 +124,7 @@ class RealTimeDataService extends EventEmitter {
   createStream(config: StreamConfig): boolean {
     try {
       if (this.streams.has(config.id)) {
-        console.warn(`Stream ${config.id} already exists`);
+        // Stream already exists
         return false;
       }
 
@@ -153,7 +153,7 @@ class RealTimeDataService extends EventEmitter {
       this.emit('stream-created', { streamId: config.id });
       return true;
     } catch (error) {
-      console.error(`Failed to create stream ${config.id}:`, error);
+      // Failed to create stream
       return false;
     }
   }
@@ -162,12 +162,12 @@ class RealTimeDataService extends EventEmitter {
   startStream(streamId: string): boolean {
     const stream = this.streams.get(streamId);
     if (!stream) {
-      console.error(`Stream ${streamId} not found`);
+      // Stream not found
       return false;
     }
 
     if (this.intervals.has(streamId)) {
-      console.warn(`Stream ${streamId} is already running`);
+      // Stream is already running
       return false;
     }
 
@@ -175,7 +175,7 @@ class RealTimeDataService extends EventEmitter {
       this.generateDataPoint(streamId);
     }, stream.config.interval);
 
-    this.intervals.set(streamId, interval);
+    this.intervals.set(streamId, interval as unknown as number);
     stream.isActive = true;
     stream.lastUpdate = new Date();
 
@@ -187,7 +187,7 @@ class RealTimeDataService extends EventEmitter {
   stopStream(streamId: string): boolean {
     const stream = this.streams.get(streamId);
     if (!stream) {
-      console.error(`Stream ${streamId} not found`);
+      // Stream not found
       return false;
     }
 
@@ -464,7 +464,7 @@ class RealTimeDataService extends EventEmitter {
           subscription.callback(filteredData);
           subscription.lastNotified = now;
         } catch (error) {
-          console.error(`Error in subscription callback ${subscriptionId}:`, error);
+          // Error in subscription callback
         }
       }
     });

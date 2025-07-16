@@ -374,7 +374,7 @@ export class DashboardService {
           throw new Error(`Unsupported data source: ${dataSource}`);
       }
     } catch (error) {
-      console.error(`Error fetching data for widget ${widget.id}:`, error);
+      // Error fetching data for widget
       return null;
     }
   }
@@ -873,7 +873,7 @@ export class DashboardService {
           const dashboard = JSON.parse(localStorage.getItem(key)!);
           this.dashboards.set(dashboard.id, dashboard);
         } catch (error) {
-          console.error(`Error loading dashboard ${key}:`, error);
+          // Error loading dashboard
         }
       }
     }
@@ -886,7 +886,7 @@ export class DashboardService {
           const template = JSON.parse(localStorage.getItem(key)!);
           this.templates.set(template.id, template);
         } catch (error) {
-          console.error(`Error loading template ${key}:`, error);
+          // Error loading template
         }
       }
     }
@@ -899,7 +899,7 @@ export class DashboardService {
           const preferences = JSON.parse(localStorage.getItem(key)!);
           this.userPreferences.set(preferences.userId, preferences);
         } catch (error) {
-          console.error(`Error loading user preferences ${key}:`, error);
+          // Error loading user preferences
         }
       }
     }

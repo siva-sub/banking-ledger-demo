@@ -75,7 +75,7 @@ class RealTimeSyncService {
   private isProcessing = false;
   private performanceMetrics: SyncPerformanceMetrics;
   private dataSnapshot: DataSnapshot | null = null;
-  private updateIntervals = new Map<string, NodeJS.Timeout>();
+  private updateIntervals = new Map<string, number>();
   private correlationCounter = 0;
 
   // Auto-refresh settings
@@ -134,7 +134,7 @@ class RealTimeSyncService {
       priority: 'low'
     });
 
-    console.log(`🔗 Component registered: ${componentId} (${registration.componentType})`);
+    // Component registered
     return componentId;
   }
 
@@ -158,7 +158,7 @@ class RealTimeSyncService {
       this.performanceMetrics.componentsListening = Array.from(this.listeners.values())
         .filter(l => l.isActive).length;
 
-      console.log(`🔌 Component unregistered: ${componentId}`);
+      // Component unregistered
     }
   }
 
@@ -208,7 +208,7 @@ class RealTimeSyncService {
       this.updateProcessingMetrics(processingTime);
 
     } catch (error) {
-      console.error('🚨 Event processing error:', error);
+      // Event processing error
       this.performanceMetrics.errorsCount++;
       this.performanceMetrics.lastErrorTime = dayjs();
     } finally {
@@ -267,12 +267,12 @@ class RealTimeSyncService {
       registration.updateCount++;
 
     } catch (error) {
-      console.error(`🚨 Listener error in ${registration.componentId}:`, error);
+      // Listener error
       
       // Deactivate problematic listeners after multiple failures
       registration.updateCount++;
       if (registration.updateCount % 10 === 0) {
-        console.warn(`⚠️ Component ${registration.componentId} has ${registration.updateCount} updates, consider review`);
+        // Component has many updates, consider review
       }
     }
   }
@@ -400,7 +400,7 @@ class RealTimeSyncService {
       this.performanceMetrics.dataRefreshRate = this.calculateRefreshRate();
 
     } catch (error) {
-      console.error('🚨 Data snapshot refresh failed:', error);
+      // Data snapshot refresh failed
       this.performanceMetrics.errorsCount++;
     }
   }
@@ -422,10 +422,10 @@ class RealTimeSyncService {
         this.emitDataChange('auto-refresh', 'scheduled_refresh');
       }, intervalMs);
 
-      this.updateIntervals.set('auto-refresh', interval);
-      console.log(`🔄 Auto-refresh enabled: ${intervalMs}ms interval`);
+      this.updateIntervals.set('auto-refresh', interval as unknown as number);
+      // Auto-refresh enabled
     } else {
-      console.log('⏸️ Auto-refresh disabled');
+      // Auto-refresh disabled
     }
   }
 
@@ -517,7 +517,7 @@ class RealTimeSyncService {
     // Clear queue
     this.eventQueue = [];
 
-    console.log('🧹 RealTimeSyncService disposed');
+    // RealTimeSyncService disposed
   }
 }
 

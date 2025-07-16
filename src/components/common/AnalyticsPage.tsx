@@ -239,7 +239,7 @@ export const AnalyticsPage: React.FC = () => {
   const processedData = useMemo(() => {
     try {
       // Debug logging
-      console.log('Analytics data debug:', { analyticsData, enhancedAnalyticsData, isLoading });
+      // Analytics data debug
       
       // Try using analyticsData first, then fall back to enhancedAnalyticsData
       const dataSource = analyticsData || enhancedAnalyticsData;
@@ -247,11 +247,11 @@ export const AnalyticsPage: React.FC = () => {
       // Return null while loading to prevent rendering charts with empty data
       if (!dataSource) {
         if (isLoading) {
-          console.log('Still loading analytics data, returning null');
+          // Still loading analytics data, returning null
           return null; // Return null to indicate loading state
         }
         
-        console.warn('No analyticsData or enhancedAnalyticsData available after loading');
+        // No analyticsData or enhancedAnalyticsData available after loading
         return {
           // Time series data
           timeSeriesData: [],
@@ -289,7 +289,7 @@ export const AnalyticsPage: React.FC = () => {
         };
       }
       
-      console.log('Processing analytics data:', dataSource);
+      // Processing analytics data
     
     const processed = {
       // Time series data - ensure proper field mapping
@@ -373,11 +373,11 @@ export const AnalyticsPage: React.FC = () => {
       predictiveData: predictiveData || []
     };
     
-    console.log('Processed data:', processed);
+    // Processed data
     return processed;
     
     } catch (error) {
-      console.error('Error processing analytics data:', error);
+      // Error processing analytics data
       // Return fallback data structure on error
       return {
         // Time series data
@@ -512,7 +512,7 @@ export const AnalyticsPage: React.FC = () => {
     
     // Enhanced data validation with debugging
     if (!ChartComponent) {
-      console.error(`Chart component not found for type: ${chartType}`);
+      // Chart component not found for type
       return (
         <Card title={title}>
           <div style={{ textAlign: 'center', padding: '40px', color: '#999' }}>
@@ -535,7 +535,7 @@ export const AnalyticsPage: React.FC = () => {
     }
     
     if (!data || data.length === 0) {
-      console.warn(`No data available for chart: ${title}`, { chartType, data });
+      // No data available for chart
       return (
         <Card title={title}>
           <div style={{ textAlign: 'center', padding: '40px', color: '#999' }}>
@@ -553,12 +553,7 @@ export const AnalyticsPage: React.FC = () => {
         item[config.yField] !== undefined
       );
       if (!hasValidData) {
-        console.warn(`Chart data missing required fields for ${title}:`, { 
-          chartType, 
-          config, 
-          sampleData: data[0],
-          expectedFields: [config.xField, config.yField]
-        });
+        // Chart data missing required fields
         return (
           <Card title={title}>
             <div style={{ textAlign: 'center', padding: '40px', color: '#999' }}>
@@ -577,12 +572,7 @@ export const AnalyticsPage: React.FC = () => {
         item[config.colorField || 'category'] !== undefined
       );
       if (!hasValidData) {
-        console.warn(`Pie chart data missing required fields for ${title}:`, { 
-          chartType, 
-          config, 
-          sampleData: data[0],
-          expectedFields: [config.angleField || 'value', config.colorField || 'category']
-        });
+        // Pie chart data missing required fields
         return (
           <Card title={title}>
             <div style={{ textAlign: 'center', padding: '40px', color: '#999' }}>
@@ -596,7 +586,7 @@ export const AnalyticsPage: React.FC = () => {
     // Additional validation for distribution charts
     if (chartType === 'column' || chartType === 'pie') {
       if (config.colorField && !data.some(item => item[config.colorField] !== undefined)) {
-        console.warn(`Missing colorField '${config.colorField}' in data for ${title}`);
+        // Missing colorField in data
       }
     }
     
@@ -960,7 +950,7 @@ export const AnalyticsPage: React.FC = () => {
             <Col xs={24} lg={12}>
               {(() => {
                 if (processedData === null) return renderChart('pie', [], {}, 'Account Type Distribution');
-                console.log('Account Distribution data check:', processedData.accountDistribution);
+                // Account Distribution data check
                 return renderChart('pie', processedData.accountDistribution, {
                   angleField: 'value',
                   colorField: 'name',
@@ -971,7 +961,7 @@ export const AnalyticsPage: React.FC = () => {
             <Col xs={24} lg={12}>
               {(() => {
                 if (processedData === null) return renderChart('column', [], {}, 'Currency Distribution');
-                console.log('Currency Distribution data check:', processedData.currencyDistribution);
+                // Currency Distribution data check
                 return renderChart('column', processedData.currencyDistribution, {
                   xField: 'category',
                   yField: 'value',
@@ -982,7 +972,7 @@ export const AnalyticsPage: React.FC = () => {
             <Col xs={24}>
               {(() => {
                 if (processedData === null) return renderChart('line', [], {}, 'Transaction Timeline');
-                console.log('Time Series data check:', processedData.timeSeriesData);
+                // Time Series data check
                 return renderChart('line', processedData.timeSeriesData, {
                   xField: 'date',
                   yField: 'value',

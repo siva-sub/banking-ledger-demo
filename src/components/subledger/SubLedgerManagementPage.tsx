@@ -63,7 +63,7 @@ export const SubLedgerManagementPage: React.FC = () => {
       });
       
     } catch (error) {
-      console.error('Error loading sub-ledger data:', error);
+      // Error loading sub-ledger data
       message.error('Failed to load sub-ledger data');
     } finally {
       setLoading(false);
@@ -86,7 +86,7 @@ export const SubLedgerManagementPage: React.FC = () => {
       // Refresh stats
       loadData();
     } catch (error) {
-      console.error('Error creating sub-ledger account:', error);
+      // Error creating sub-ledger account
       message.error('Failed to create sub-ledger account');
     }
   };

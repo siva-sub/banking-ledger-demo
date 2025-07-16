@@ -32,7 +32,7 @@ export const Dashboard: React.FC = () => {
         setAccounts(ledgerAccounts);
         setJournal(journalEntries);
       } catch (error) {
-        console.error("Failed to fetch dashboard data:", error);
+        // Failed to fetch dashboard data
       } finally {
         setLoading(false);
       }

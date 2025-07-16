@@ -85,14 +85,14 @@ const App: React.FC = () => {
     }
 
     // Initialize real-time sync service
-    console.log('🚀 Initializing real-time synchronization service...');
+    // Initializing real-time synchronization service
     
     // Configure auto-refresh with optimized settings
     realTimeSyncService.configureAutoRefresh(true, 60000); // Enabled with 60 second intervals
 
     // Cleanup function
     return () => {
-      console.log('🧹 Cleaning up real-time synchronization service...');
+      // Cleaning up real-time synchronization service
       realTimeSyncService.dispose();
     };
   }, []);

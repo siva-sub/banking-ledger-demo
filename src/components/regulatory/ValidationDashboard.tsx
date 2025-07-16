@@ -150,7 +150,7 @@ export const ValidationDashboard: React.FC = () => {
       setComplianceHistory(generateComplianceHistory(validationSummary));
       setAlerts(generateMockAlerts());
     } catch (e) {
-      console.error(e);
+      // Validation error
     } finally {
       setLoading(false);
     }

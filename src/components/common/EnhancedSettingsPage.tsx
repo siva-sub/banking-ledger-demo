@@ -127,7 +127,7 @@ export const EnhancedSettingsPage: React.FC = () => {
 
   // Real-time sync integration
   const settingsSync = useSettingsSync('enhanced-settings-page', (settings) => {
-    console.log('📡 Settings updated via real-time sync:', settings);
+    // Settings updated via real-time sync
   });
 
   const setPreviewMode = (payload: boolean) => {
@@ -153,7 +153,7 @@ export const EnhancedSettingsPage: React.FC = () => {
       try {
         setSettingsHistory(JSON.parse(stored));
       } catch (error) {
-        console.error('Failed to load settings history:', error);
+        // Failed to load settings history
       }
     }
   }, []);
@@ -242,11 +242,11 @@ export const EnhancedSettingsPage: React.FC = () => {
       });
       
     } catch (error) {
-      console.error('Data generation failed:', error);
+      // Data generation failed
       message.error('Failed to generate data');
       setGenerationProgress(null);
     }
-  }, [dataGenerator, state.basicSettings, selectedProfile, addToHistory, showNotification]);
+  }, [dataGenerator, state.basicSettings, selectedProfile, addToHistory, showNotification, settingsSync]);
 
   // Preview functionality
   const handlePreview = useCallback(() => {

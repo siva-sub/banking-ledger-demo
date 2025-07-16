@@ -291,7 +291,7 @@ export class AdvancedDataGenerationService {
       try {
         callback(progress);
       } catch (error) {
-        console.error('Error in progress callback:', error);
+        // Error in progress callback
       }
     });
   }

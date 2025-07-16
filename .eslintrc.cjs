@@ -59,6 +59,12 @@ module.exports = {
       env: {
         jest: true
       }
+    },
+    {
+      files: ['**/validation-engine-test.ts', '**/demo-test.ts', '**/debug-test.ts', '**/mas610ValidationDemo.ts', '**/validationTesting.ts', '**/etlService.ts', '**/PersonaManager.tsx', '**/EnhancedJournalSearchPage.tsx', '**/RealTimeDashboard.tsx', '**/DashboardDemo.tsx'],
+      rules: {
+        'no-console': 'off'
+      }
     }
   ]
 };

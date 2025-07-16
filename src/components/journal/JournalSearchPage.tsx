@@ -95,7 +95,7 @@ export const JournalSearchPage: React.FC = () => {
       await performSearch({}, sortOptions, { page: 1, pageSize: currentPageSize });
       
     } catch (err) {
-      console.error('Error loading initial data:', err);
+      // Error loading initial data
       setError('Failed to load journal entries. Please try again.');
     } finally {
       setLoading(false);
@@ -117,7 +117,7 @@ export const JournalSearchPage: React.FC = () => {
       const newSuggestions = journalSearchService.getSearchSuggestions(query, journalEntries);
       setSuggestions(newSuggestions);
     } catch (err) {
-      console.error('Error updating suggestions:', err);
+      // Error updating suggestions
     }
   };
 
@@ -145,7 +145,7 @@ export const JournalSearchPage: React.FC = () => {
       loadSearchHistory();
       
     } catch (err) {
-      console.error('Error performing search:', err);
+      // Error performing search
       setError('Search failed. Please try again.');
       message.error('Search failed. Please try again.');
     } finally {

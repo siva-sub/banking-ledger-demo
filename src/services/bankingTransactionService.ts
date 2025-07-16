@@ -34,7 +34,7 @@ class BankingTransactionService {
      * Generate realistic banking transactions following proper flow
      */
     generateBankingTransactions(count: number = 100): BankingTransactionResult[] {
-        console.log(`🏦 Generating ${count} banking transactions following proper flow...`);
+        // Generating banking transactions following proper flow
         
         const results: BankingTransactionResult[] = [];
         const startDate = dayjs().subtract(90, 'days');
@@ -44,7 +44,7 @@ class BankingTransactionService {
         const subLedgerAccounts = subLedgerService.getSubLedgerAccounts();
         
         if (subLedgerAccounts.length === 0) {
-            console.warn('⚠️ No sub-ledger accounts available. Creating some first...');
+            // No sub-ledger accounts available. Creating some first
             return results;
         }
 
@@ -55,11 +55,11 @@ class BankingTransactionService {
                     results.push(result);
                 }
             } catch (error) {
-                console.error(`❌ Failed to generate transaction ${i}:`, error);
+                // Failed to generate transaction
             }
         }
 
-        console.log(`✅ Generated ${results.length} banking transactions successfully`);
+        // Generated banking transactions successfully
         return results;
     }
 
@@ -127,7 +127,6 @@ class BankingTransactionService {
      */
     private processBankingTransaction(dailyTransaction: DailyTransaction): BankingTransactionResult {
         const subLedgerUpdates: any[] = [];
-        let journalEntry: any;
         const glUpdates: any[] = [];
 
         // Step 2: Update Sub-Ledgers
@@ -135,7 +134,7 @@ class BankingTransactionService {
         subLedgerUpdates.push(subLedgerUpdate);
 
         // Step 3: Create Journal Entry
-        journalEntry = this.createJournalEntry(dailyTransaction);
+        const journalEntry = this.createJournalEntry(dailyTransaction);
 
         // Step 4: Update General Ledger (happens automatically through journal posting)
         if (journalEntry) {
@@ -143,7 +142,7 @@ class BankingTransactionService {
                 glService.postJournalEntry(journalEntry.entryId);
                 glUpdates.push({ status: 'posted', entryId: journalEntry.entryId });
             } catch (error) {
-                console.warn(`⚠️ Failed to post journal entry ${journalEntry.entryId}:`, error);
+                // Failed to post journal entry
                 glUpdates.push({ status: 'failed', entryId: journalEntry.entryId, error });
             }
         }
@@ -212,7 +211,7 @@ class BankingTransactionService {
             
             return journalEntry;
         } catch (error) {
-            console.error(`❌ Failed to create journal entry for ${transaction.transactionId}:`, error);
+            // Failed to create journal entry
             return null;
         }
     }
