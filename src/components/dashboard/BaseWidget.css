@@ -1,0 +1,250 @@
+.base-widget {
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.base-widget.editing {
+  cursor: move;
+}
+
+.base-widget.selected {
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.base-widget.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+}
+
+.base-widget.hovered {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.widget-card {
+  height: 100%;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.widget-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.widget-title .title-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.widget-title .favorite-icon {
+  color: #faad14;
+  font-size: 12px;
+}
+
+.widget-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.base-widget:hover .widget-controls {
+  opacity: 1;
+}
+
+.widget-controls .drag-handle {
+  cursor: move;
+}
+
+.widget-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 16px;
+}
+
+.widget-no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #999;
+}
+
+.widget-timestamp {
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .widget-controls {
+    opacity: 1;
+  }
+  
+  .widget-title .title-text {
+    font-size: 13px;
+  }
+  
+  .widget-card .ant-card-body {
+    padding: 12px;
+  }
+}
+
+/* Dark theme support */
+.dark-theme .widget-card {
+  background-color: #1f1f1f;
+  border-color: #303030;
+}
+
+.dark-theme .widget-title .title-text {
+  color: #ffffff;
+}
+
+.dark-theme .widget-timestamp {
+  color: #999999;
+}
+
+/* Animation for fullscreen */
+.base-widget.fullscreen {
+  animation: expandToFullscreen 0.3s ease-out;
+}
+
+@keyframes expandToFullscreen {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Resize handle */
+.widget-resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  cursor: se-resize;
+  background: linear-gradient(
+    -45deg,
+    transparent 0%,
+    transparent 40%,
+    #ccc 40%,
+    #ccc 60%,
+    transparent 60%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.base-widget.editing .widget-resize-handle {
+  opacity: 1;
+}
+
+.base-widget.editing:hover .widget-resize-handle {
+  opacity: 1;
+}
+
+/* Grid snapping visual feedback */
+.base-widget.snapping {
+  border: 2px dashed #1890ff;
+  background-color: rgba(24, 144, 255, 0.1);
+}
+
+/* Widget type specific styles */
+.widget-kpi {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.widget-chart {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.widget-table {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.widget-gauge {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* Loading shimmer effect */
+.widget-loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, transparent 37%, #f0f0f0 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* Error state styling */
+.widget-error {
+  border-color: #ff4d4f;
+  background-color: #fff2f0;
+}
+
+.widget-error .ant-alert {
+  border: none;
+  background: transparent;
+}
+
+/* Success state styling */
+.widget-success {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+}
+
+/* Warning state styling */
+.widget-warning {
+  border-color: #faad14;
+  background-color: #fffbe6;
+}
+
+/* Accessibility improvements */
+.base-widget:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+.base-widget[aria-selected="true"] {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* Print styles */
+@media print {
+  .widget-controls {
+    display: none !important;
+  }
+  
+  .widget-timestamp {
+    display: none !important;
+  }
+  
+  .base-widget {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

@@ -3,6 +3,9 @@ import { PersonaType } from '../types/persona';
 import { Transaction, Account, PaymentInstruction } from '../types/financial';
 import { PERSONAS, DEFAULT_PERSONA } from '../constants/personas';
 import { persistAppState, loadPersistedState, createContextHelpers } from '../utils/appContextUtils';
+import { DemoDataSettings, AdvancedSettings, DEFAULT_DEMO_SETTINGS, DEFAULT_ADVANCED_SETTINGS } from '../types/settings';
+import { realTimeSyncService, emitDataChange, emitSettingsChange } from '../services/realTimeSyncService';
+import dayjs from 'dayjs';
 
 // State interface
 interface AppState {
@@ -24,6 +27,21 @@ interface AppState {
   demoScenario: string | null;
   demoProgress: number;
   isInDemoMode: boolean;
+
+  // Settings
+  basicSettings: DemoDataSettings;
+  advancedSettings: AdvancedSettings;
+  isLiveMode: boolean;
+  previewMode: boolean;
+  systemMetrics: SystemMetrics;
+
+  // Analytics state
+  analyticsData: any;
+  isLoadingAnalytics: boolean;
+  analyticsError: string | null;
+  interactionState: any;
+  filterState: any;
+  realTimeConfig: any;
 }
 
 // Action types
@@ -47,7 +65,19 @@ type AppAction =
   | { type: 'SET_DEMO_SCENARIO'; payload: string }
   | { type: 'SET_DEMO_PROGRESS'; payload: number }
   | { type: 'SET_DEMO_MODE'; payload: boolean }
-  | { type: 'RESET_STATE' };
+  | { type: 'RESET_STATE' }
+  | { type: 'SET_BASIC_SETTINGS'; payload: Partial<DemoDataSettings> }
+  | { type: 'SET_ADVANCED_SETTINGS'; payload: Partial<AdvancedSettings> }
+  | { type: 'SET_LIVE_MODE'; payload: boolean }
+  | { type: 'SET_PREVIEW_MODE'; payload: boolean }
+  | { type: 'UPDATE_SYSTEM_METRICS'; payload: Partial<SystemMetrics> }
+  | { type: 'SET_ANALYTICS_DATA'; payload: any }
+  | { type: 'SET_LOADING_ANALYTICS'; payload: boolean }
+  | { type: 'SET_ANALYTICS_ERROR'; payload: string | null }
+  | { type: 'SET_INTERACTION_STATE'; payload: any }
+  | { type: 'SET_FILTER_STATE'; payload: any }
+  | { type: 'CLEAR_FILTERS' }
+  | { type: 'SET_REAL_TIME_CONFIG'; payload: any };
 
 // Notification interface
 interface Notification {
@@ -58,6 +88,17 @@ interface Notification {
   timestamp: Date;
   duration?: number;
 }
+
+// System Metrics interface
+interface SystemMetrics {
+    dataRefreshRate: number;
+    memoryUsage: number;
+    lastUpdate: dayjs.Dayjs;
+    activeConnections: number;
+    errorCount: number;
+    componentsListening: number;
+}
+
 
 // Context interface
 interface AppContextValue {
@@ -77,6 +118,16 @@ interface AppContextValue {
   setDemoProgress: (progress: number) => void;
   toggleDemoMode: () => void;
   resetState: () => void;
+  
+  // Real-time sync helper functions
+  updateBasicSettings: (settings: Partial<DemoDataSettings>) => void;
+  updateAdvancedSettings: (settings: Partial<AdvancedSettings>) => void;
+  setLiveMode: (enabled: boolean) => void;
+  updateSystemMetrics: (metrics: Partial<SystemMetrics>) => void;
+  setAnalyticsData: (data: any) => void;
+  setFilterState: (filters: any) => void;
+  clearFilters: () => void;
+  setInteractionState: (interactionState: any) => void;
 }
 
 // Initial state
@@ -92,6 +143,36 @@ const initialState: AppState = {
   demoScenario: null,
   demoProgress: 0,
   isInDemoMode: false,
+  basicSettings: DEFAULT_DEMO_SETTINGS,
+  advancedSettings: DEFAULT_ADVANCED_SETTINGS,
+  isLiveMode: true,
+  previewMode: false,
+  systemMetrics: {
+    dataRefreshRate: 0,
+    memoryUsage: 0,
+    lastUpdate: dayjs(),
+    activeConnections: 0,
+    errorCount: 0,
+    componentsListening: 0,
+  },
+  analyticsData: null,
+  isLoadingAnalytics: false,
+  analyticsError: null,
+  interactionState: {
+    selectedFilters: {},
+    brushRanges: {},
+    selectedElements: {},
+    drillDownData: [],
+    isLoading: false,
+    error: null,
+  },
+  filterState: {
+    dateRange: [dayjs().subtract(90, 'days'), dayjs()],
+    currencies: [],
+    segments: [],
+    riskCategories: []
+  },
+  realTimeConfig: { enabled: false, interval: 30000, chartsToUpdate: [] },
 };
 
 // Reducer
@@ -102,27 +183,22 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         currentPersona: action.payload,
         isAuthenticated: true,
-        loading: false,
       };
-      
     case 'SET_LOADING':
       return {
         ...state,
         loading: action.payload,
       };
-      
     case 'SET_AUTHENTICATED':
       return {
         ...state,
         isAuthenticated: action.payload,
       };
-      
     case 'ADD_TRANSACTION':
       return {
         ...state,
         transactions: [...state.transactions, action.payload],
       };
-      
     case 'UPDATE_TRANSACTION':
       return {
         ...state,
@@ -130,19 +206,16 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           t.id === action.payload.id ? action.payload : t
         ),
       };
-      
     case 'SET_TRANSACTIONS':
       return {
         ...state,
         transactions: action.payload,
       };
-      
     case 'ADD_ACCOUNT':
       return {
         ...state,
         accounts: [...state.accounts, action.payload],
       };
-      
     case 'UPDATE_ACCOUNT':
       return {
         ...state,
@@ -150,82 +223,137 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           a.id === action.payload.id ? action.payload : a
         ),
       };
-      
     case 'SET_ACCOUNTS':
       return {
         ...state,
         accounts: action.payload,
       };
-      
     case 'ADD_PAYMENT_INSTRUCTION':
       return {
         ...state,
         paymentInstructions: [...state.paymentInstructions, action.payload],
       };
-      
     case 'SET_PAYMENT_INSTRUCTIONS':
       return {
         ...state,
         paymentInstructions: action.payload,
       };
-      
     case 'TOGGLE_SIDEBAR':
       return {
         ...state,
         sidebarCollapsed: !state.sidebarCollapsed,
       };
-      
     case 'SET_SIDEBAR_COLLAPSED':
       return {
         ...state,
         sidebarCollapsed: action.payload,
       };
-      
     case 'ADD_NOTIFICATION':
       return {
         ...state,
         notifications: [...state.notifications, action.payload],
       };
-      
     case 'REMOVE_NOTIFICATION':
       return {
         ...state,
         notifications: state.notifications.filter(n => n.id !== action.payload),
       };
-      
     case 'CLEAR_NOTIFICATIONS':
       return {
         ...state,
         notifications: [],
       };
-      
     case 'SET_DEMO_SCENARIO':
       return {
         ...state,
         demoScenario: action.payload,
-        isInDemoMode: true,
       };
-      
     case 'SET_DEMO_PROGRESS':
       return {
         ...state,
         demoProgress: action.payload,
       };
-      
     case 'SET_DEMO_MODE':
       return {
         ...state,
         isInDemoMode: action.payload,
-        demoScenario: action.payload ? state.demoScenario : null,
-        demoProgress: action.payload ? state.demoProgress : 0,
       };
-      
     case 'RESET_STATE':
       return {
         ...initialState,
         loading: false,
       };
-      
+    case 'SET_BASIC_SETTINGS':
+      return {
+        ...state,
+        basicSettings: { ...state.basicSettings, ...action.payload },
+      };
+    case 'SET_ADVANCED_SETTINGS':
+      return {
+        ...state,
+        advancedSettings: { ...state.advancedSettings, ...action.payload },
+      };
+    case 'SET_LIVE_MODE':
+      return {
+        ...state,
+        isLiveMode: action.payload,
+      };
+    case 'SET_PREVIEW_MODE':
+      return {
+        ...state,
+        previewMode: action.payload,
+      };
+    case 'UPDATE_SYSTEM_METRICS':
+      return {
+        ...state,
+        systemMetrics: { ...state.systemMetrics, ...action.payload },
+      };
+    case 'SET_ANALYTICS_DATA':
+      return {
+        ...state,
+        analyticsData: action.payload,
+      };
+    case 'SET_LOADING_ANALYTICS':
+      return {
+        ...state,
+        isLoadingAnalytics: action.payload,
+      };
+    case 'SET_ANALYTICS_ERROR':
+      return {
+        ...state,
+        analyticsError: action.payload,
+      };
+    case 'SET_INTERACTION_STATE':
+      return {
+        ...state,
+        interactionState: { ...state.interactionState, ...action.payload },
+      };
+    case 'SET_FILTER_STATE':
+      return {
+        ...state,
+        filterState: { ...state.filterState, ...action.payload },
+      };
+    case 'CLEAR_FILTERS':
+      return {
+        ...state,
+        filterState: {
+          dateRange: [dayjs().subtract(90, 'days'), dayjs()],
+          currencies: [],
+          segments: [],
+          riskCategories: []
+        },
+        interactionState: {
+          ...state.interactionState,
+          selectedFilters: {},
+          brushRanges: {},
+          selectedElements: {},
+        },
+      };
+    case 'SET_REAL_TIME_CONFIG':
+      return {
+        ...state,
+        realTimeConfig: { ...state.realTimeConfig, ...action.payload },
+      };
     default:
       return state;
   }
@@ -296,17 +424,28 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }, [state]);
   
-  // Helper functions
+  // Helper functions with real-time sync integration
   const setPersona = (persona: PersonaType) => {
     dispatch({ type: 'SET_PERSONA', payload: persona });
+    // Emit real-time event
+    realTimeSyncService.emitEvent({
+      type: 'PERSONA_CHANGED',
+      source: 'app-context',
+      payload: { persona },
+      priority: 'medium'
+    });
   };
   
   const addTransaction = (transaction: Transaction) => {
     dispatch({ type: 'ADD_TRANSACTION', payload: transaction });
+    // Emit data change event
+    emitDataChange('app-context', 'transaction_added', { transaction });
   };
   
   const updateTransaction = (transaction: Transaction) => {
     dispatch({ type: 'UPDATE_TRANSACTION', payload: transaction });
+    // Emit data change event
+    emitDataChange('app-context', 'transaction_updated', { transaction });
   };
   
   const addAccount = (account: Account) => {
@@ -357,6 +496,59 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const resetState = () => {
     dispatch({ type: 'RESET_STATE' });
     localStorage.removeItem('appState');
+    // Emit reset event
+    emitDataChange('app-context', 'state_reset');
+  };
+
+  // New real-time sync helper functions
+  const updateBasicSettings = (settings: Partial<DemoDataSettings>) => {
+    dispatch({ type: 'SET_BASIC_SETTINGS', payload: settings });
+    // Emit settings change event
+    emitSettingsChange('app-context', settings);
+  };
+
+  const updateAdvancedSettings = (settings: Partial<AdvancedSettings>) => {
+    dispatch({ type: 'SET_ADVANCED_SETTINGS', payload: settings });
+    // Emit settings change event
+    emitSettingsChange('app-context', settings);
+  };
+
+  const setLiveMode = (enabled: boolean) => {
+    dispatch({ type: 'SET_LIVE_MODE', payload: enabled });
+    // Configure auto-refresh based on live mode
+    if (enabled && state.basicSettings.autoRefresh) {
+      realTimeSyncService.configureAutoRefresh(true, state.basicSettings.refreshInterval * 1000);
+    } else {
+      realTimeSyncService.configureAutoRefresh(false);
+    }
+    // Emit settings change
+    emitSettingsChange('app-context', { isLiveMode: enabled });
+  };
+
+  const updateSystemMetrics = (metrics: Partial<SystemMetrics>) => {
+    dispatch({ type: 'UPDATE_SYSTEM_METRICS', payload: metrics });
+  };
+
+  const setAnalyticsData = (data: any) => {
+    dispatch({ type: 'SET_ANALYTICS_DATA', payload: data });
+  };
+
+  const setFilterState = (filters: any) => {
+    dispatch({ type: 'SET_FILTER_STATE', payload: filters });
+  };
+
+  const clearFilters = () => {
+    dispatch({ type: 'CLEAR_FILTERS' });
+    realTimeSyncService.emitEvent({
+      type: 'FILTER_APPLIED',
+      source: 'app-context',
+      payload: { filters: {}, action: 'clear' },
+      priority: 'medium'
+    });
+  };
+
+  const setInteractionState = (interactionState: any) => {
+    dispatch({ type: 'SET_INTERACTION_STATE', payload: interactionState });
   };
   
   const value: AppContextValue = {
@@ -374,6 +566,15 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setDemoProgress,
     toggleDemoMode,
     resetState,
+    // Real-time sync functions
+    updateBasicSettings,
+    updateAdvancedSettings,
+    setLiveMode,
+    updateSystemMetrics,
+    setAnalyticsData,
+    setFilterState,
+    clearFilters,
+    setInteractionState,
   };
   
   return (

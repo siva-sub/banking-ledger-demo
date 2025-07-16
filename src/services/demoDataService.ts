@@ -113,36 +113,3 @@ export const generateDynamicAnalyticsData = (settings: DemoDataSettings) => {
   
   return dailyData;
 };
-
-export const generateMAS610ReportData = (settings: DemoDataSettings) => {
-  const { transactionCount, maxTransactionAmount, errorRate, complianceScore } = settings;
-  
-  const totalAmount = transactionCount * (maxTransactionAmount * 0.3 * Math.random() + maxTransactionAmount * 0.1);
-  const successfulTransactions = Math.floor(transactionCount * (100 - errorRate) / 100);
-  
-  return {
-    header: {
-      reportType: 'MAS610',
-      reportingDate: dayjs().format('YYYY-MM-DD'),
-      reportingTime: dayjs().toISOString(),
-      institutionCode: 'DEMO001',
-      institutionName: 'Demo Bank Singapore Pte Ltd',
-      reportingCurrency: 'SGD',
-      reportingPeriod: 'DAILY'
-    },
-    summary: {
-      totalTransactions: transactionCount,
-      successfulTransactions,
-      failedTransactions: transactionCount - successfulTransactions,
-      totalAmount: parseFloat(totalAmount.toFixed(2)),
-      successRate: parseFloat((100 - errorRate).toFixed(1)),
-      complianceScore: parseFloat(complianceScore.toFixed(1))
-    },
-    compliance: {
-      amlChecks: Math.floor(transactionCount * 0.99),
-      sanctionsChecks: transactionCount,
-      fraudChecks: Math.floor(transactionCount * 0.97),
-      regulatoryBreaches: Math.floor(transactionCount * errorRate / 100 / 10)
-    }
-  };
-};

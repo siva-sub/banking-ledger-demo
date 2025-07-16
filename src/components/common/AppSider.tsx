@@ -8,7 +8,11 @@ import {
   UserSwitchOutlined,
   BarChartOutlined,
   SettingOutlined,
-  AuditOutlined
+  AuditOutlined,
+  ThunderboltOutlined,
+  LineChartOutlined,
+  BookOutlined,
+  BankOutlined
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -20,9 +24,20 @@ export const AppSider: React.FC = () => {
 
   const menuItems = [
     {
-      key: '/dashboard',
+      key: 'dashboard',
       icon: <DashboardOutlined />,
       label: 'Dashboard',
+      children: [
+        {
+          key: '/dashboard',
+          label: 'Standard Dashboard',
+        },
+        {
+          key: '/dashboard/realtime',
+          icon: <ThunderboltOutlined />,
+          label: 'Real-Time Dashboard',
+        },
+      ],
     },
     {
       key: '/transactions',
@@ -35,9 +50,20 @@ export const AppSider: React.FC = () => {
       label: 'Reports',
     },
     {
-      key: '/analytics',
+      key: 'analytics',
       icon: <BarChartOutlined />,
       label: 'Analytics',
+      children: [
+        {
+          key: '/analytics',
+          label: 'Standard Analytics',
+        },
+        {
+          key: '/analytics/realtime',
+          icon: <LineChartOutlined />,
+          label: 'Real-Time Analytics',
+        },
+      ],
     },
     {
       key: 'regulatory',

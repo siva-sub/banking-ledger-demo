@@ -59,15 +59,33 @@ ehthumbs.db
 Thumbs.db
 
 # Development and documentation files
-docs/
-*.md
-!README.md
+docs/ai-context/
+CLAUDE.md
 *.pdf
 *.ecore
 *.db
 *.db-shm
 *.db-wal
 scripts/
+
+# AI Context and temporary files
+MCP-ASSISTANT-RULES.md
+*_analysis.json
+*_interfaces.ts
+*_requirements.json
+*_types.ts
+mas610_*.ts
+mas610_*.json
+*.zip
+archive_*.zip
+unzipped/
+python-tools/
+validation-engine-test.ts
+debug-test.ts
+demo-test.ts
+screenshots/
+assets/
+*.xlsx
 
 # Test files and coverage
 src/**/*.test.tsx

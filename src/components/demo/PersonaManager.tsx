@@ -6,92 +6,11 @@ import { PERSONAS, PersonaType } from '../../constants/personas';
 
 const { Title, Paragraph, Text } = Typography;
 
-interface DemoPersona {
-  id: string;
-  name: string;
-  role: string;
-  email: string;
-  permissions: string[];
-  defaultDashboard: string;
-  avatar: string;
-  department: string;
-  joinDate: string;
-  lastLogin: string;
-}
-
-// Mock personas for demonstration - mapped to actual PersonaType IDs
-const mockPersonas: DemoPersona[] = [
-  {
-    id: 'financial-ops',
-    name: 'Sarah Chen',
-    role: 'Financial Operations Manager',
-    email: 'sarah.chen@demobank.com',
-    permissions: ['payments', 'reconciliation', 'reporting'],
-    defaultDashboard: 'operations',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sarah',
-    department: 'Treasury Operations',
-    joinDate: '2020-03-15',
-    lastLogin: new Date().toISOString(),
-  },
-  {
-    id: 'compliance',
-    name: 'Michael Rodriguez',
-    role: 'Compliance Officer',
-    email: 'michael.rodriguez@demobank.com',
-    permissions: ['compliance', 'reporting', 'audit'],
-    defaultDashboard: 'compliance',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=michael',
-    department: 'Risk & Compliance',
-    joinDate: '2019-01-10',
-    lastLogin: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: 'treasury',
-    name: 'Jennifer Park',
-    role: 'Treasury Manager',
-    email: 'jennifer.park@demobank.com',
-    permissions: ['treasury', 'liquidity', 'reporting'],
-    defaultDashboard: 'treasury',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=jennifer',
-    department: 'Treasury Management',
-    joinDate: '2018-07-22',
-    lastLogin: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-  },
-  {
-    id: 'risk-analyst',
-    name: 'David Kumar',
-    role: 'Risk Management Analyst',
-    email: 'david.kumar@demobank.com',
-    permissions: ['risk', 'analytics', 'reporting'],
-    defaultDashboard: 'risk',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=david',
-    department: 'Risk Management',
-    joinDate: '2021-11-03',
-    lastLogin: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
-  },
-  {
-    id: 'system-admin',
-    name: 'Alex Thompson',
-    role: 'System Administrator',
-    email: 'alex.thompson@demobank.com',
-    permissions: ['admin', 'system', 'users', 'reporting'],
-    defaultDashboard: 'admin',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alex',
-    department: 'IT Operations',
-    joinDate: '2017-04-18',
-    lastLogin: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
-  },
-];
-
 export const PersonaManager: React.FC = () => {
   const { state, setPersona } = useAppContext();
 
-  const handlePersonaSwitch = (persona: DemoPersona) => {
-    // Convert DemoPersona to PersonaType for compatibility
-    const personaType = persona.id as PersonaType;
-    if (personaType in PERSONAS) {
-      setPersona(personaType);
-    }
+  const handlePersonaSwitch = (personaType: PersonaType) => {
+    setPersona(personaType);
   };
 
   const getPermissionColor = (permission: string) => {
@@ -123,54 +42,50 @@ export const PersonaManager: React.FC = () => {
       </div>
 
       <Row gutter={[16, 16]}>
-        {mockPersonas.map((persona) => (
-          <Col xs={24} md={12} lg={8} key={persona.id}>
+        {Object.entries(PERSONAS).map(([id, persona]) => (
+          <Col xs={24} md={12} lg={8} key={id}>
             <Card
               actions={[
                 <Button
                   key="switch"
-                  type={state.currentPersona === persona.id ? 'primary' : 'default'}
-                  onClick={() => handlePersonaSwitch(persona)}
-                  disabled={state.currentPersona === persona.id}
+                  type={state.currentPersona === id ? 'primary' : 'default'}
+                  onClick={() => handlePersonaSwitch(id as PersonaType)}
+                  disabled={state.currentPersona === id}
                 >
-                  {state.currentPersona === persona.id ? 'Current User' : 'Switch to User'}
+                  {state.currentPersona === id ? 'Current User' : 'Switch to User'}
                 </Button>,
               ]}
               style={{
-                border: state.currentPersona === persona.id ? '2px solid #1890ff' : '1px solid #f0f0f0',
+                border: state.currentPersona === id ? '2px solid #1890ff' : '1px solid #f0f0f0',
               }}
             >
               <Card.Meta
                 avatar={
                   <Avatar
                     size={64}
-                    src={persona.avatar}
+                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${persona.name.split(' ')[0]}`}
                     icon={<UserOutlined />}
                   />
                 }
                 title={persona.name}
                 description={
                   <div>
-                    <Text type="secondary">{persona.role}</Text>
+                    <Text type="secondary">{persona.title}</Text>
                     <br />
                     <Text type="secondary" style={{ fontSize: '12px' }}>
-                      {persona.department}
+                      {persona.description}
                     </Text>
                   </div>
                 }
               />
               
-              <div style={{ marginTop: '16px' }}>
-                <Text strong>Email:</Text>
-                <br />
-                <Text type="secondary">{persona.email}</Text>
-              </div>
-
               <div style={{ marginTop: '12px' }}>
                 <Text strong>Permissions:</Text>
                 <br />
                 <div style={{ marginTop: '8px' }}>
-                  {persona.permissions.map((permission) => (
+                  {Object.entries(persona.permissions)
+                    .filter(([, hasPermission]) => hasPermission)
+                    .map(([permission]) => (
                     <Tag
                       key={permission}
                       color={getPermissionColor(permission)}
@@ -180,14 +95,6 @@ export const PersonaManager: React.FC = () => {
                     </Tag>
                   ))}
                 </div>
-              </div>
-
-              <div style={{ marginTop: '12px' }}>
-                <Text strong>Member Since:</Text>
-                <br />
-                <Text type="secondary">
-                  {new Date(persona.joinDate).toLocaleDateString()}
-                </Text>
               </div>
             </Card>
           </Col>

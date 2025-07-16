@@ -37,7 +37,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
     });
 
     // Log error for debugging (in development)
-    if (process.env['NODE_ENV'] === 'development') {
+    if (import.meta.env.MODE === 'development') {
       // eslint-disable-next-line no-console
       console.error('Error caught by boundary:', error, errorInfo);
     }
@@ -80,7 +80,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
             </Button>
           ]}
         >
-          {process.env['NODE_ENV'] === 'development' && this.state.error && (
+          {import.meta.env.MODE === 'development' && this.state.error && (
             <details style={{ 
               marginTop: '20px', 
               padding: '10px', 
@@ -144,7 +144,7 @@ export const FinancialErrorBoundary: React.FC<{ children: React.ReactNode }> = (
         </Button>
       ]}
     >
-      {process.env['NODE_ENV'] === 'development' && (
+      {import.meta.env.MODE === 'development' && (
         <details style={{ 
           marginTop: '20px', 
           padding: '10px', 

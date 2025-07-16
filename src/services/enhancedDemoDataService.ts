@@ -1,4 +1,14 @@
 import dayjs from 'dayjs';
+import { 
+  comprehensiveDemoDataGenerator,
+  generateComprehensiveMAS610Data,
+  AdvancedCounterpartyGenerator,
+  AdvancedFacilityGenerator,
+  AdvancedDerivativeGenerator,
+  AdvancedGLTransactionGenerator,
+  COMPREHENSIVE_SSIC_CODES,
+  GL_ACCOUNTS
+} from './advancedDemoDataGenerator';
 
 // Master data types based on the comprehensive guide
 export interface Counterparty {
@@ -60,8 +70,8 @@ export interface GLTransaction {
   EntityCode: string;
 }
 
-// Demo date - July 15, 2025 as specified in the guide
-const DEMO_DATE = dayjs('2025-07-15');
+// Demo date - current date
+const DEMO_DATE = dayjs();
 
 // Master data arrays for realistic generation
 const SINGAPORE_SSIC_CODES = {
@@ -241,15 +251,16 @@ export const generateFacilities = (counterparties: Counterparty[], count: number
     const outstandingAmount = generateLogNormalAmount();
     const limitAmount = outstandingAmount * (1 + Math.random() * 0.3); // 0-30% higher than outstanding
 
-    // Origination date logic - 10% in current quarter for "New Credit Facilities"
+    // Origination date logic - 40% in last 90 days, 60% in last 2 years
     let originationDate: dayjs.Dayjs;
-    if (Math.random() < 0.10) {
-      // Current quarter (Apr 1 - Jun 30, 2025)
-      originationDate = dayjs('2025-04-01').add(Math.floor(Math.random() * 90), 'day');
+    if (Math.random() < 0.40) {
+      // Recent activity - last 90 days (40% of transactions)
+      originationDate = DEMO_DATE.subtract(Math.floor(Math.random() * 90), 'day');
     } else {
-      // Between Jan 1, 2021 and July 15, 2025
-      const startDate = dayjs('2021-01-01');
-      const daysDiff = DEMO_DATE.diff(startDate, 'day');
+      // Historical activity - between 2 years ago and 90 days ago
+      const startDate = DEMO_DATE.subtract(2, 'year');
+      const endDate = DEMO_DATE.subtract(90, 'day');
+      const daysDiff = endDate.diff(startDate, 'day');
       originationDate = startDate.add(Math.floor(Math.random() * daysDiff), 'day');
     }
 
@@ -399,22 +410,31 @@ export const generateDerivatives = (counterparties: Counterparty[], count: numbe
   return derivatives;
 };
 
+export const generateTransactionsFromFacilities = (facilities: Facility[]): GLTransaction[] => {
+  const transactions: GLTransaction[] = [];
+  facilities.forEach(facility => {
+    const transaction: GLTransaction = {
+      TransactionID: `TRN-${facility.FacilityID}`,
+      FacilityID: facility.FacilityID,
+      TransactionDate: facility.OriginationDate,
+      Amount: facility.OutstandingAmount,
+      Currency: facility.Currency,
+      DebitAccount: '1200-Accounts Receivable',
+      CreditAccount: '4000-Revenue',
+      TransactionType: 'LoanDisbursement',
+      Description: `Loan disbursement for facility ${facility.FacilityID}`,
+      IsIntercompany: false,
+      EntityCode: 'DEMO001',
+    };
+    transactions.push(transaction);
+  });
+  return transactions;
+};
+
 // Generate comprehensive demo dataset
 export const generateComprehensiveDemoData = () => {
-  const counterparties = generateCounterparties(500);
-  const facilities = generateFacilities(counterparties, 2000);
-  const derivatives = generateDerivatives(counterparties, 100);
-  
-  return {
-    counterparties,
-    facilities, 
-    derivatives,
-    metadata: {
-      demoDate: DEMO_DATE.format('YYYY-MM-DD'),
-      generatedAt: new Date().toISOString(),
-      totalRecords: counterparties.length + facilities.length + derivatives.length
-    }
-  };
+  console.log('🚀 Generating comprehensive banking demo data with advanced scenarios...');
+  return comprehensiveDemoDataGenerator.generateComprehensiveDemoData();
 };
 
 // Enhanced MAS 610 report generation using the comprehensive data
@@ -545,4 +565,79 @@ const generateAppendixHData = (data: any) => {
     totalPropertyLoans: propertyLoans.length,
     validationIssues: []
   };
+};
+
+// ============================================================================
+// COMPREHENSIVE DEMO DATA GENERATION SYSTEM
+// ============================================================================
+
+/**
+ * Generate comprehensive demo data using the advanced data generation system
+ * This replaces the basic generation functions with sophisticated, scenario-driven data
+ */
+export const generateAdvancedDemoData = () => {
+  console.log('🚀 Generating comprehensive banking demo data with advanced scenarios...');
+  return comprehensiveDemoDataGenerator.generateComprehensiveDemoData();
+};
+
+/**
+ * Generate enhanced MAS 610 reports with comprehensive validation
+ */
+export const generateAdvancedMAS610Report = (appendixId: string = 'AppendixD3') => {
+  console.log(`📊 Generating enhanced MAS 610 ${appendixId} report...`);
+  return generateComprehensiveMAS610Data(appendixId);
+};
+
+/**
+ * Generate individual datasets using advanced generators with custom parameters
+ */
+export const generateCustomCounterparties = (count: number = 500, seed?: number) => {
+  const generator = new AdvancedCounterpartyGenerator(seed);
+  return generator.generateCounterparties(count);
+};
+
+export const generateCustomFacilities = (counterparties: Counterparty[], count: number = 2000, seed?: number) => {
+  const generator = new AdvancedFacilityGenerator(seed);
+  return generator.generateFacilities(counterparties, count);
+};
+
+export const generateCustomDerivatives = (counterparties: Counterparty[], count: number = 100, seed?: number) => {
+  const generator = new AdvancedDerivativeGenerator(seed);
+  return generator.generateDerivatives(counterparties, count);
+};
+
+export const generateCustomGLTransactions = (facilities: Facility[], count: number = 10000, seed?: number) => {
+  const generator = new AdvancedGLTransactionGenerator(seed);
+  return generator.generateGLTransactions(facilities, count);
+};
+
+/**
+ * Get comprehensive SSIC codes for sector analysis
+ */
+export const getComprehensiveSSICCodes = () => {
+  return COMPREHENSIVE_SSIC_CODES;
+};
+
+/**
+ * Get GL account structure for transaction analysis
+ */
+export const getGLAccountStructure = () => {
+  return GL_ACCOUNTS;
+};
+
+/**
+ * Generate demo data with specific validation scenarios for testing
+ */
+export const generateValidationTestData = () => {
+  console.log('⚠️ Generating demo data with intentional validation issues for testing...');
+  const data = comprehensiveDemoDataGenerator.generateComprehensiveDemoData();
+  
+  console.log(`Generated test data with ${data.validationSummary.criticalIssues} critical issues and ${data.validationSummary.highIssues} high issues`);
+  console.log('Validation scenarios included:');
+  console.log('- Missing SSIC codes for corporate counterparties');
+  console.log('- Facility outstanding amounts exceeding limits');  
+  console.log('- Intercompany transaction mismatches');
+  console.log('- Property loans with invalid LTV ratios');
+  
+  return data;
 };

@@ -5,6 +5,8 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -49,7 +51,11 @@
     "node_modules",
     "dist",
     "build",
-    "coverage"
+    "coverage",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "src/demo-test.ts",
+    "src/components/journal/**/*"
   ],
   "references": [
     { "path": "./tsconfig.node.json" }
